@@ -29,11 +29,12 @@ export async function searchManga(title, cover_container)
                 console.log(`MangaTitle: ${mangaTitle}`);
 
                 localStorage.setItem("mangaTitle", mangaTitle);
+                localStorage.setItem("mangaID", mangaID);
 
                 //below code will handle getting the cover file name
                 try
                 {
-                    const response = await fetch(`https://api.mangadex.org/cover/${encodeURIComponent(mangaCoverID)}`);
+                    const response = await fetch(`https://api.mangadex.org/cover/${mangaCoverID}`);
 
                     if(response.ok)
                     {
@@ -79,10 +80,49 @@ export async function searchManga(title, cover_container)
 
 export async function getChapters(mangaID)
 {
-    const response = await fetch(`https://api.mangadex.org/manga/${mangaID}/feed`);
+    const response = await fetch(`https://api.mangadex.org/manga/${mangaID}/feed?limit=100&translatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc&includeEmptyPages=0`);
 
     if(response.ok)
     {
-        const jsonData = await response.json();
+        const json_data = await response.json();
+
+        if(json_data.data != null)
+        {
+            let chapterList = document.getElementById("chapterList");
+            let chapters = new Map();
+
+            console.log(json_data.data.length);
+
+            for(let i = 0; i < json_data.data.length; i++)
+            {
+                console.log(json_data.data[i].id);
+                console.log(json_data.data[i].attributes.chapter);
+                console.log(json_data.data[i].attributes.title);
+
+                chapters.set(json_data.data[i].id, json_data.data[i].attributes.chapter);
+
+            }
+
+            for(let j = 0; j < chapters.size; j++)
+            {
+                let chapter = document.createElement("a");
+                chapter.href = "#";
+                chapter.textContent = "chapter: " + j;
+
+                chapterList.appendChild(chapter);
+            }
+
+
+            console.log(chapters.size);
+            console.log("Hello");
+        }
+        else
+        {
+            console.log("JSON empty");
+        }
+    }
+    else
+    {
+        console.log("Error in API request");
     }
 }
