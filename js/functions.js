@@ -89,7 +89,7 @@ export async function getChapters(mangaID)
         if(json_data.data != null)
         {
             let chapterList = document.getElementById("chapterList");
-            let chapters = new Map();
+            let chapters = {};
 
             console.log(json_data.data.length);
 
@@ -99,21 +99,58 @@ export async function getChapters(mangaID)
                 console.log(json_data.data[i].attributes.chapter);
                 console.log(json_data.data[i].attributes.title);
 
-                chapters.set(json_data.data[i].id, json_data.data[i].attributes.chapter);
-
+                //chapters.set(json_data.data[i].id, json_data.data[i].attributes.chapter);
+                chapters[i] = {chapterID: json_data.data[i].id, chapterNum: json_data.data[i].attributes.chapter, chapterTitle: json_data.data[i].attributes.title};
             }
 
-            for(let j = 0; j < chapters.size; j++)
+            console.log(chapters[0].chapterTitle);
+
+            for(let j = 0; j < json_data.data.length; j++)
             {
                 let chapter = document.createElement("a");
                 chapter.href = "#";
-                chapter.textContent = "chapter: " + j;
+                chapter.textContent = `Chapter ${chapters[j].chapterNum}: ${chapters[j].chapterTitle}`;
+
+                chapterList.appendChild(chapter);
+            }
+
+            /*
+            for(let element of mangaChapterIDListArray)
+            {
+                let chapter = document.createElement("a");
+                chapter.href = "#";
+                chapter.textContent = `Chapter: ${chapters.get(element)}`;
+
+                chapterList.appendChild(chapter);
+
+                console.log(element);
+                console.log(chapters.get(element));
+            }
+
+
+            //console.log(chapters.get());
+
+            /*
+            for(let x of mangaChapterNums)
+            {
+                let chapter = document.createElement("a");
+                chapter.href = "#";
+                chapter.textContent = `Chapter: ${x}`;
 
                 chapterList.appendChild(chapter);
             }
 
 
-            console.log(chapters.size);
+            for(let j = 0; j < chapters.size; j++)
+            {
+                let chapter = document.createElement("a");
+                chapter.href = "#";
+                chapter.textContent = "chapter: " + mangaChapterNum[j];
+
+                chapterList.appendChild(chapter);
+            }
+            */
+
             console.log("Hello");
         }
         else
