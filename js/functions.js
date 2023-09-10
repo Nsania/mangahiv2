@@ -99,7 +99,6 @@ export async function getChapters(mangaID)
                 console.log(json_data.data[i].attributes.chapter);
                 console.log(json_data.data[i].attributes.title);
 
-                //chapters.set(json_data.data[i].id, json_data.data[i].attributes.chapter);
                 chapters[i] = {chapterID: json_data.data[i].id, chapterNum: json_data.data[i].attributes.chapter, chapterTitle: json_data.data[i].attributes.title};
             }
 
@@ -108,50 +107,12 @@ export async function getChapters(mangaID)
             for(let j = 0; j < json_data.data.length; j++)
             {
                 let chapter = document.createElement("a");
-                chapter.href = "#";
+                chapter.href = `reader.html?mangaChapterID=${chapters[j].chapterID}`;
                 chapter.textContent = `Chapter ${chapters[j].chapterNum}: ${chapters[j].chapterTitle}`;
 
                 chapterList.appendChild(chapter);
             }
 
-            /*
-            for(let element of mangaChapterIDListArray)
-            {
-                let chapter = document.createElement("a");
-                chapter.href = "#";
-                chapter.textContent = `Chapter: ${chapters.get(element)}`;
-
-                chapterList.appendChild(chapter);
-
-                console.log(element);
-                console.log(chapters.get(element));
-            }
-
-
-            //console.log(chapters.get());
-
-            /*
-            for(let x of mangaChapterNums)
-            {
-                let chapter = document.createElement("a");
-                chapter.href = "#";
-                chapter.textContent = `Chapter: ${x}`;
-
-                chapterList.appendChild(chapter);
-            }
-
-
-            for(let j = 0; j < chapters.size; j++)
-            {
-                let chapter = document.createElement("a");
-                chapter.href = "#";
-                chapter.textContent = "chapter: " + mangaChapterNum[j];
-
-                chapterList.appendChild(chapter);
-            }
-            */
-
-            console.log("Hello");
         }
         else
         {
@@ -161,5 +122,34 @@ export async function getChapters(mangaID)
     else
     {
         console.log("Error in API request");
+    }
+}
+
+export async function getPages(mangaChapterID)
+{
+    const response = await fetch(`https://api.mangadex.org/at-home/server/${mangaChapterID}`);
+    let reader = document.getElementById("reader");
+
+    if(response.ok)
+    {
+        const json_data = await response.json();
+
+        if(json_data != null)
+        {
+            const hash = json_data.chapter.hash;
+            console.log(hash);
+            console.log(json_data.chapter.data.length);
+
+            let i = 0;
+
+            while(i < json_data.chapter.data.length)
+            {
+                let image = document.createElement("img");
+                image.src = `https://uploads.mangadex.org/data/${hash}/${json_data.chapter.data[i]}`;
+
+                reader.appendChild(image);
+                i++;
+            }
+        }
     }
 }
