@@ -10,9 +10,7 @@ export async function getSuggestions(searchContent)
 
     if(searchContent.trim() != '')
     {
-        let response = await fetch(`https://api.mangadex.org/manga?limit=5&offset=0&title=${searchContent}`);
-
-
+        let response = await fetch(`https://api.mangadex.org/manga?title=${searchContent}&limit=5`);
 
         if(response.ok)
         {
@@ -21,33 +19,38 @@ export async function getSuggestions(searchContent)
             if(json_data.data.length > 0)
             {
                 let i = 0;
+
                 while(i < json_data.data.length)
                 {
-
                     let mangaID = json_data.data[i].id;
                     let mangaTitle = json_data.data[i].attributes.title.en;
-                    let mangaCoverID = json_data.data[i].relationships[2].id;
+                    let mangaCoverFileName;
 
-                    if(mangaCoverID != null)
+                    if(mangaID != null)
                     {
-                        let response2 = await fetch(`https://api.mangadex.org/cover/${mangaCoverID}`);
+                        let response2 = await fetch(`https://api.mangadex.org/cover?limit=1&manga[]=${mangaID}`);
 
                         if(response2.ok)
                         {
                             let json_data2 = await response2.json();
 
-                            if(json_data2 != null)
+                            if(json_data2.data.length > 0)
                             {
-                                const coverFileName = json_data2.data.attributes.fileName;
-
-                                let panel = document.createElement("img");
-                                panel.src = `https://uploads.mangadex.org/covers/${mangaID}/${coverFileName}.256.jpg`;
-                                resultsContainer.appendChild(panel);
+                                mangaCoverFileName = json_data2.data[0].attributes.fileName;
                             }
                         }
-
+                        else
+                        {
+                            console.log("cover id not found");
+                        }
                     }
 
+                    if(mangaCoverFileName != null)
+                    {
+                        let panel = document.createElement("img");
+                        panel.src = `https://uploads.mangadex.org/covers/${encodeURIComponent(mangaID)}/${encodeURIComponent(mangaCoverFileName)}.256.jpg`;
+                        resultsContainer.appendChild(panel);
+                    }
                     console.log(mangaTitle);
                     i++;
                 }
