@@ -1,4 +1,67 @@
 //library for various function to be used in my manga reader
+export async function getSuggestions(searchContent)
+{
+    let resultsContainer = document.getElementById("results");
+
+    while(resultsContainer.firstChild)
+    {
+        resultsContainer.removeChild(resultsContainer.firstChild);
+    }
+
+    if(searchContent.trim() != '')
+    {
+        let response = await fetch(`https://api.mangadex.org/manga?limit=5&offset=0&title=${searchContent}`);
+
+
+
+        if(response.ok)
+        {
+            let json_data = await response.json();
+
+            if(json_data.data.length > 0)
+            {
+                let i = 0;
+                while(i < json_data.data.length)
+                {
+
+                    let mangaID = json_data.data[i].id;
+                    let mangaTitle = json_data.data[i].attributes.title.en;
+                    let mangaCoverID = json_data.data[i].relationships[2].id;
+
+                    if(mangaCoverID != null)
+                    {
+                        let response2 = await fetch(`https://api.mangadex.org/cover/${mangaCoverID}`);
+
+                        if(response2.ok)
+                        {
+                            let json_data2 = await response2.json();
+
+                            if(json_data2 != null)
+                            {
+                                const coverFileName = json_data2.data.attributes.fileName;
+
+                                let panel = document.createElement("img");
+                                panel.src = `https://uploads.mangadex.org/covers/${mangaID}/${coverFileName}.256.jpg`;
+                                resultsContainer.appendChild(panel);
+                            }
+                        }
+
+                    }
+
+                    console.log(mangaTitle);
+                    i++;
+                }
+            }
+        }
+    }
+    else
+    {
+        console.log("empty");
+    }
+
+
+}
+
 
 //this method will search for the manga ID, cover ID, cover file name. It will display the cover art in the image container
 export async function searchManga(title, cover_container)
@@ -42,11 +105,11 @@ export async function searchManga(title, cover_container)
 
                         if(json_data.data != null)
                         {
-                            const CoverFileName = json_data.data.attributes.fileName;
+                            const coverFileName = json_data.data.attributes.fileName;
 
-                            console.log(`CoverFileName: ${CoverFileName}`);
+                            console.log(`CoverFileName: ${coverFileName}`);
 
-                            cover_container.src = `https://uploads.mangadex.org/covers/${mangaID}/${CoverFileName}.256.jpg`;
+                            cover_container.src = `https://uploads.mangadex.org/covers/${mangaID}/${coverFileName}.256.jpg`;
                         }
                         else
                         {
@@ -129,6 +192,7 @@ export async function getPages(mangaChapterID)
 {
     const response = await fetch(`https://api.mangadex.org/at-home/server/${mangaChapterID}`);
     let reader = document.getElementById("reader");
+
 
     if(response.ok)
     {

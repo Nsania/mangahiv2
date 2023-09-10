@@ -6,8 +6,6 @@ let mangaID = localStorage.getItem("mangaID");
 const header = document.getElementById("header");
 header.innerHTML = mangaTitle;
 
-
-
 try
 {
     getChapters(mangaID);
