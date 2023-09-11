@@ -43,5 +43,9 @@ searchBar.addEventListener("input", handleInput);
 searchButton.addEventListener("click", function()
 {
     title = searchBar.value;
-    searchManga(title, cover_container);
+    if(title.trim() !== "")
+    {
+        window.location.href = `search.html?search=${title}`;
+    }
+    //searchManga(title, cover_container);
 });

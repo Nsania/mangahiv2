@@ -25,6 +25,7 @@ export async function getSuggestions(searchContent)
                 {
                     let mangaID = json_data.data[i].id;
                     let mangaTitle = json_data.data[i].attributes.title.en;
+                    let mangaDesc = json_data.data[i].attributes.description.en;
                     let mangaCoverFileName;
 
                     if(mangaID != null)
@@ -51,7 +52,7 @@ export async function getSuggestions(searchContent)
 
                         let suggestion_container = document.createElement("div");
                         let suggestion_link = document.createElement("a");
-                        suggestion_link.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}`;
+                        suggestion_link.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
 
                         let suggestion_image = document.createElement("img");
                         suggestion_image.src = `https://uploads.mangadex.org/covers/${encodeURIComponent(mangaID)}/${encodeURIComponent(mangaCoverFileName)}.256.jpg`;
@@ -79,80 +80,61 @@ export async function getSuggestions(searchContent)
 }
 
 //this method will search for the manga ID, cover ID, cover file name. It will display the cover art in the image container
-export async function searchManga(title, cover_container)
+export async function searchManga(title, container)
 {
-    //const cover_container = document.getElementById("cover"); //cover
-
-    //tries the block of code inside
-    try {
+    if(title.trim() !== "") {
         // Make a GET request to the MangaDex API search endpoint
-        const response = await fetch(`https://api.mangadex.org/manga?title=${encodeURIComponent(title)}`);
-
+        const response = await fetch(`https://api.mangadex.org/manga?title=${title}&limit=10`);
         // Check if the request was successful (status code 200)
-        if (response.ok)
-        {
+        if (response.ok) {
             const json_data = await response.json();
-
             // Check if the data contains results
-            if (json_data.data.length > 0)
-            {
-                //here we store the manga and cover id
-                const mangaID = json_data.data[0].id;
-                const mangaCoverID = json_data.data[0].relationships[2].id;
-                const mangaTitle = json_data.data[0].attributes.title.en;
+            if (json_data.data.length > 0) {
+                let i = 0;
 
-                console.log(`Manga: ${title}`)
-                console.log(`MangaID: ${mangaID}`);
-                console.log(`CoverID: ${mangaCoverID}`);
-                console.log(`MangaTitle: ${mangaTitle}`);
-
-                localStorage.setItem("mangaTitle", mangaTitle);
-                localStorage.setItem("mangaID", mangaID);
-
-                //below code will handle getting the cover file name
-                try
+                while (i < json_data.data.length)
                 {
-                    const response = await fetch(`https://api.mangadex.org/cover/${mangaCoverID}`);
+                    let mangaID = json_data.data[i].id;
+                    let mangaTitle = json_data.data[i].attributes.title.en;
+                    let mangaDesc = json_data.data[i].attributes.description.en;
+                    let mangaCoverFileName;
 
-                    if(response.ok)
-                    {
-                        const json_data = await response.json();
+                    if (mangaID != null) {
+                        let response2 = await fetch(`https://api.mangadex.org/cover?limit=1&manga[]=${mangaID}`);
 
-                        if(json_data.data != null)
-                        {
-                            const coverFileName = json_data.data.attributes.fileName;
+                        if (response2.ok) {
+                            let json_data2 = await response2.json();
 
-                            console.log(`CoverFileName: ${coverFileName}`);
-
-                            cover_container.src = `https://uploads.mangadex.org/covers/${mangaID}/${coverFileName}.256.jpg`;
-                        }
-                        else
-                        {
-                            console.log("Cover not found")
+                            if (json_data2.data.length > 0) {
+                                mangaCoverFileName = json_data2.data[0].attributes.fileName;
+                            }
+                        } else {
+                            console.log("cover id not found");
                         }
                     }
-                    else
-                    {
-                        console.error("Error in API request.");
-                    }
-                }
-                catch(error)
-                {
-                    console.error("An error occurred: ", error);
-                }
 
-            }
-            else
-            {
-                console.log("Manga not found.");
+                    if (mangaCoverFileName != null) {
+
+                        let suggestion_container = document.createElement("div");
+                        let suggestion_link = document.createElement("a");
+                        suggestion_link.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
+
+                        let suggestion_image = document.createElement("img");
+                        suggestion_image.src = `https://uploads.mangadex.org/covers/${encodeURIComponent(mangaID)}/${encodeURIComponent(mangaCoverFileName)}.256.jpg`;
+                        let suggestion_title = document.createElement("h1");
+                        suggestion_title.textContent = `${mangaTitle}`;
+
+                        suggestion_link.appendChild(suggestion_image);
+                        suggestion_container.appendChild(suggestion_link);
+                        suggestion_container.appendChild(suggestion_title);
+
+                        container.appendChild(suggestion_container);
+                    }
+                    console.log(mangaTitle);
+                    i++;
+                }
             }
         }
-        else
-        {
-            console.error("Error in API request.");
-        }
-    } catch (error) {
-        console.error("An error occurred:", error);
     }
 }
 
@@ -161,6 +143,7 @@ export async function searchManga(title, cover_container)
 export async function getChapters(mangaID)
 {
     const response = await fetch(`https://api.mangadex.org/manga/${mangaID}/feed?limit=100&translatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc&includeEmptyPages=0`);
+
     let chapters = {};
     let chaptersArray = [];
     let chapterList = document.getElementById("chapterList");
@@ -196,7 +179,6 @@ export async function getChapters(mangaID)
                         console.log(json_data2.data[i].attributes.chapter);
                         console.log(json_data2.data[i].attributes.title);
 
-                        //chapters[i + chaptersIndex] = {chapterID: json_data2.data[i].id, chapterNum: json_data2.data[i].attributes.chapter, chapterTitle: json_data2.data[i].attributes.title};
                         chaptersArray.push({chapterID: json_data2.data[i].id, chapterNum: json_data2.data[i].attributes.chapter, chapterTitle: json_data2.data[i].attributes.title});
                         chaptersLength++;
                     }
@@ -218,8 +200,9 @@ export async function getChapters(mangaID)
         chaptersArray.forEach(function(element)
         {
             let chapter = document.createElement("a");
-            chapter.href = `reader.html?mangaChapterID=${element.chapterID}`;
+            chapter.href = `reader.html?&chapter=${element.chapterNum}&chapterID=${element.chapterID}`;
             chapter.textContent = `Chapter ${element.chapterNum}: ${element.chapterTitle}`;
+            
 
             chapterList.appendChild(chapter);
         });
