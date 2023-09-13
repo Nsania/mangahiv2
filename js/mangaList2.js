@@ -8,6 +8,11 @@ const mangaTitle = search.get("mangaTitle");
 const coverFileName = search.get("coverFileName");
 const mangaDesc = search.get("mangaDesc");
 
+localStorage.setItem("mangaID", mangaID);
+localStorage.setItem("mangaTitle", mangaTitle);
+localStorage.setItem("coverFileName", coverFileName);
+localStorage.setItem("mangaDesc", mangaDesc);
+
 const header = document.getElementById("header");
 header.innerHTML = mangaTitle;
 const description = document.getElementById("manga_desc");

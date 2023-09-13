@@ -4,10 +4,15 @@ const query = window.location.search;
 const search = new URLSearchParams(query);
 const mangaChapterID = search.get("chapterID");
 const chapter = search.get("chapter");
-const mangaID = localStorage.getItem("mangaID");
 
+const chapterListButton = document.getElementById("chapter_list_button");
 const prevButton = document.getElementById("previous_button");
 const nextButton = document.getElementById("next_button");
+
+const mangaID = localStorage.getItem("mangaID");
+const mangaTitle = localStorage.getItem("mangaTitle");
+const coverFileName = localStorage.getItem("coverFileName");
+const mangaDesc = localStorage.getItem("mangaDesc");
 
 let chaptersArray = await loadChapters(mangaID);
 function findPreviousChapterID(chapterID, chaptersArray)
@@ -123,6 +128,16 @@ prevButton.addEventListener("click", function()
 nextButton.addEventListener("click", function()
 {
     loadNextChapter(nextChapter, nextChapterID);
+});
+
+function goToChapterList(mangaTitle, mangaID, coverFileName, mangaDesc)
+{
+    window.location.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${coverFileName}&mangaDesc=${mangaDesc}`;
+}
+
+chapterListButton.addEventListener('click', function()
+{
+    goToChapterList(mangaTitle, mangaID, coverFileName, mangaDesc);
 });
 
 getPages(mangaChapterID);
