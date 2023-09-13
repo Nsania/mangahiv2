@@ -24,3 +24,17 @@
 {
     height: 10vw;
 }
+
+#chapter_select_list
+{
+    display: flex;
+    flex-direction: column;
+    max-height: 10vh;
+    overflow-x: auto;
+}
+
+#reader>img
+{
+    width: 100vw;
+    height: 80vh;
+}

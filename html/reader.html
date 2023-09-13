@@ -3,17 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    
+    <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
-  <h1>Reader</h1>
+    <h1>Reader</h1>
     <a href="index.html"><button>Home</button></a>
     <button id="previous_button">Previous</button>
     <button id="next_button">Next</button>
     <button id="chapter_list_button">Chapter List</button>
-    <div id="reader">
+    <br>
     
+    <div class="chapter_select_container">
+        <label id="chapter_selected" for="chapter_select_drop_down"></label>
+        <button id="chapter_select_drop_down">More</button>
+        <br>
+        <div id="chapter_select_list">
+        
+        </div>
     </div>
     
-    <script type="module" src="../js/getPages.js"></script>
+    
+    <div id="reader">
+    </div>
+    
+    <button id="previous_button2">Previous</button>
+    <button id="next_button2">Next</button>
+    <button id="chapter_list_button2">Chapter List</button>
+  
+  
+  <script type="module" src="../js/getPages.js"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@ function handleInput()
     if (!/  /.test(inputValue))
     {
         inputBuffer = inputValue; // Store the current input in the buffer
-        timeoutId = setTimeout(printInput, 1000); // Print the input after 2 seconds
+        timeoutId = setTimeout(printInput, 500); // Print the input after half a second
     }
 }
 

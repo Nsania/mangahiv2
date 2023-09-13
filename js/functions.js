@@ -201,7 +201,7 @@ export async function getChapters(mangaID)
         chaptersArray.forEach(function(element)
         {
             let chapter = document.createElement("a");
-            chapter.href = `reader.html?&chapter=${element.chapterNum}&chapterID=${element.chapterID}`;
+            chapter.href = `reader.html?&chapter=${element.chapterNum}&chapterID=${element.chapterID}&chapterTitle=${element.chapterTitle}`;
             chapter.textContent = `Chapter ${element.chapterNum}: ${element.chapterTitle}`;
 
 
