@@ -63,6 +63,7 @@ chapterSelectButton.addEventListener('click', function()
     if(chapterSelectList.style.visibility === 'hidden')
     {
         chapterSelectList.style.visibility = 'visible'
+        chapterSelectList.scrollTop = chapterLocation;
     }
     else
     {
