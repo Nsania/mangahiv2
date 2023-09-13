@@ -144,6 +144,8 @@ export async function getChapters(mangaID)
 {
     const response = await fetch(`https://api.mangadex.org/manga/${mangaID}/feed?limit=100&translatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc&includeEmptyPages=0`);
 
+    localStorage.setItem("mangaID", mangaID);
+
     let chapters = {};
     let chaptersArray = [];
     let chapterList = document.getElementById("chapterList");
@@ -196,16 +198,17 @@ export async function getChapters(mangaID)
 
         chaptersArray = chaptersArray.sort(function(a,b){return b.chapterNum - a.chapterNum});
 
-
         chaptersArray.forEach(function(element)
         {
             let chapter = document.createElement("a");
             chapter.href = `reader.html?&chapter=${element.chapterNum}&chapterID=${element.chapterID}`;
             chapter.textContent = `Chapter ${element.chapterNum}: ${element.chapterTitle}`;
-            
+
 
             chapterList.appendChild(chapter);
         });
+
+
     }
     else
     {
@@ -216,9 +219,9 @@ export async function getChapters(mangaID)
 //method will get pages for each chapter
 export async function getPages(mangaChapterID)
 {
+
     const response = await fetch(`https://api.mangadex.org/at-home/server/${mangaChapterID}`);
     let reader = document.getElementById("reader");
-
 
     if(response.ok)
     {
@@ -242,4 +245,65 @@ export async function getPages(mangaChapterID)
             }
         }
     }
+}
+
+export async function loadChapters(mangaID)
+{
+    const response = await fetch(`https://api.mangadex.org/manga/${mangaID}/feed?limit=100&translatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc&includeEmptyPages=0`);
+
+    let chapters = {};
+    let chaptersArray = [];
+    let chapterList = document.getElementById("chapterList");
+
+    if(response.ok)
+    {
+        const json_data = await response.json();
+
+        let total = json_data.total;
+        let requests = Math.ceil(total/100);
+
+        console.log(`Total: ${total}`);
+        console.log(`Requests: ${requests}`);
+
+        let i = 0;
+        let offset = 0;
+        let chaptersIndex = 0;
+        let chaptersLength = 0;
+
+        while(i < requests)
+        {
+            const response2 = await fetch(`https://api.mangadex.org/manga/${mangaID}/feed?limit=100&offset=${offset}&translatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc`);
+
+            if(response2.ok)
+            {
+                const json_data2 = await response2.json();
+
+                if(json_data2.data != null)
+                {
+                    for(let i = 0; i < json_data2.data.length; i++)
+                    {
+                        chaptersArray.push({chapterID: json_data2.data[i].id, chapterNum: json_data2.data[i].attributes.chapter, chapterTitle: json_data2.data[i].attributes.title});
+                        chaptersLength++;
+                    }
+                }
+                else
+                {
+                    console.log("JSON empty");
+                }
+            }
+
+            chaptersIndex = chaptersLength;
+            i++;
+            offset+=100;
+        }
+
+        chaptersArray = chaptersArray.sort(function(a,b){return b.chapterNum - a.chapterNum});
+
+    }
+    else
+    {
+        console.log("Error in API request");
+    }
+
+    return chaptersArray;
 }
