@@ -162,8 +162,6 @@ export async function getChapters(mangaID)
 
         let i = 0;
         let offset = 0;
-        let chaptersIndex = 0;
-        let chaptersLength = 0;
 
         while(i < requests)
         {
@@ -175,14 +173,13 @@ export async function getChapters(mangaID)
 
                 if(json_data2.data != null)
                 {
-                    for(let i = 0; i < json_data2.data.length; i++)
+                    for(let j = 0; j < json_data2.data.length; j++)
                     {
-                        console.log(json_data2.data[i].id);
-                        console.log(json_data2.data[i].attributes.chapter);
-                        console.log(json_data2.data[i].attributes.title);
+                        console.log(json_data2.data[j].id);
+                        console.log(json_data2.data[j].attributes.chapter);
+                        console.log(json_data2.data[j].attributes.title);
 
-                        chaptersArray.push({chapterID: json_data2.data[i].id, chapterNum: json_data2.data[i].attributes.chapter, chapterTitle: json_data2.data[i].attributes.title});
-                        chaptersLength++;
+                        chaptersArray.push({chapterID: json_data2.data[j].id, chapterNum: json_data2.data[j].attributes.chapter, chapterTitle: json_data2.data[j].attributes.title});
                     }
                 }
                 else
@@ -190,8 +187,6 @@ export async function getChapters(mangaID)
                     console.log("JSON empty");
                 }
             }
-
-            chaptersIndex = chaptersLength;
             i++;
             offset+=100;
         }
@@ -267,8 +262,6 @@ export async function loadChapters(mangaID)
 
         let i = 0;
         let offset = 0;
-        let chaptersIndex = 0;
-        let chaptersLength = 0;
 
         while(i < requests)
         {
@@ -280,10 +273,9 @@ export async function loadChapters(mangaID)
 
                 if(json_data2.data != null)
                 {
-                    for(let i = 0; i < json_data2.data.length; i++)
+                    for(let j = 0; j < json_data2.data.length; j++)
                     {
-                        chaptersArray.push({chapterID: json_data2.data[i].id, chapterNum: json_data2.data[i].attributes.chapter, chapterTitle: json_data2.data[i].attributes.title});
-                        chaptersLength++;
+                        chaptersArray.push({chapterID: json_data2.data[j].id, chapterNum: json_data2.data[j].attributes.chapter, chapterTitle: json_data2.data[j].attributes.title});
                     }
                 }
                 else
@@ -292,7 +284,6 @@ export async function loadChapters(mangaID)
                 }
             }
 
-            chaptersIndex = chaptersLength;
             i++;
             offset+=100;
         }

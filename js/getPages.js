@@ -35,13 +35,34 @@ chaptersArray.forEach(e => {
     chapterSelectList.appendChild(option);
 });
 
+let index;
+
+for(let i = 0; i < chaptersArray.length; i++)
+{
+    if(chaptersArray[i].chapterID === mangaChapterID)
+    {
+        index = i;
+        break;
+    }
+}
+
+let containerHeight = chapterSelectList.scrollHeight;
+console.log(containerHeight)
+
+let chapterHeight = chapterSelectList.children[index].offsetTop;
+console.log(chapterHeight);
+
+let chapterLocation = chapterHeight - 120;
+console.log(chapterLocation);
+
+chapterSelectList.scrollTop = chapterLocation;
+
 chapterSelectList.style.visibility = 'hidden';
 chapterSelectButton.addEventListener('click', function()
 {
     if(chapterSelectList.style.visibility === 'hidden')
     {
         chapterSelectList.style.visibility = 'visible'
-        console.log("Hello");
     }
     else
     {
