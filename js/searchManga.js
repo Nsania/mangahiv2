@@ -1,9 +1,10 @@
-import {getSuggestions, searchManga} from "./functions.js";
+import {getSuggestions, searchManga, getRandomManga} from "./functions.js";
 
 const searchBar = document.getElementById("search");
 const searchButton = document.getElementById("search_button");
 const cover_container = document.getElementById("cover");
 const resultsContainer = document.getElementById("results");
+const discovery = document.querySelector(".discovery");
 let title;
 
 
@@ -49,3 +50,7 @@ searchButton.addEventListener("click", function()
     }
     //searchManga(title, cover_container);
 });
+
+getRandomManga(discovery);
+getRandomManga(discovery);
+getRandomManga(discovery);

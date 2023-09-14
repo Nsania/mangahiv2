@@ -102,14 +102,18 @@ export async function searchManga(title, container)
                     if (mangaID != null) {
                         let response2 = await fetch(`https://api.mangadex.org/cover?limit=1&manga[]=${mangaID}`);
 
-                        if (response2.ok) {
+                        if(response2.ok)
+                        {
                             let json_data2 = await response2.json();
 
-                            if (json_data2.data.length > 0) {
+                            if (json_data2.data.length > 0)
+                            {
                                 mangaCoverFileName = json_data2.data[0].attributes.fileName;
                             }
-                        } else {
-                            console.log("cover id not found");
+                        }
+                        else
+                        {
+                            console.log("Cover ID not found");
                         }
                     }
 
@@ -297,4 +301,57 @@ export async function loadChapters(mangaID)
     }
 
     return chaptersArray;
+}
+
+export async function getRandomManga(container)
+{
+    const response = await fetch(`https://api.mangadex.org/manga/random`);
+
+    if(response.ok)
+    {
+        const json_data = await response.json();
+
+        console.log(json_data.data.id);
+        console.log(json_data.data.attributes.title.en);
+        console.log(json_data.data.attributes.description.en)
+
+        const mangaID = json_data.data.id;
+        const mangaTitle = json_data.data.attributes.title.en;
+        const mangaDesc = json_data.data.attributes.description.en;
+        let mangaCoverFileName;
+
+        if(mangaID != null)
+        {
+            const response2 = await fetch(`https://api.mangadex.org/cover?limit=1&manga[]=${mangaID}`);
+
+
+            if(response2.ok)
+            {
+                const json_data2 = await response2.json();
+
+                if (json_data2.data.length > 0)
+                {
+                    mangaCoverFileName = json_data2.data[0].attributes.fileName;
+                }
+            }
+            else
+            {
+                console.log("Cover ID not found");
+            }
+        }
+
+        let panel = document.createElement("div");
+        let link = document.createElement("a");
+        link.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
+        let cover = document.createElement("img");
+        cover.src = `https://uploads.mangadex.org/covers/${mangaID}/${mangaCoverFileName}.256.jpg`;
+        let title = document.createElement("h1");
+        title.textContent = mangaTitle;
+
+        link.appendChild(cover);
+        panel.appendChild(link);
+        panel.appendChild(title);
+
+        container.appendChild(panel);
+    }
 }
