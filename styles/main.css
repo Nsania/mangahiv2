@@ -1,8 +1,23 @@
+*
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /*font-family: 'Titillium Web', sans-serif;*/
+}
+
+body
+{
+    background-color: #383545;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------*/
 #chapterList
 {
     display: flex;
     flex-direction: column;
 }
+
 
 .results
 {
@@ -38,3 +53,87 @@
     width: 100vw;
     height: 80vh;
 }
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*FOR INDEX.HTML*/
+.header
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    width: 100vw;
+    background-color: #16162e;
+}
+
+.title_container
+{
+    width: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    /*letter-spacing: 1px;*/
+    font-size: 0.8em;
+    color: white;
+}
+
+.title_container>img
+{
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+}
+
+.header_content_container
+{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search_container>input
+{
+    height: 36px;
+    width: 200px;
+    border: none;
+    border-radius: 50px;
+}
+
+.discovery
+{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: flex-start;
+    background-color: white;
+}
+
+.discovery>div
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.discovery>div>a, .discovery>div>a>img
+{
+    height: 320px;
+    width: 224px;
+}
+
+.discovery>div>h1
+{
+    text-align: start;
+    font-size: 1.5em;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 15ch;
+}
+
+
+
+/*-----------------------------------------------------------------------------------------------------------------*/

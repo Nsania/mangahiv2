@@ -2,28 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Manga-Hi</title>
     <script type="module" src="../js/searchManga.js" defer></script>
     
     <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" type="image/png" href="/images/Laura/favicon-32x32.png">
+    
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    
+    
 </head>
 <body>
+    <header class="header">
+        <span class="header_content_container">
+            <span class="title_container">
+                <img src="/images/laura.png">
+                <h1>MangaHi</h1>
+            </span>
+           
+        
+            <span class="search_container">
+                <input type="search" id="search">
+                <button id="search_button">Search</button>
+            </span>
+        </span>
+    </header>
     
     <h1>Welcome to Manga-Hi</h1>
-    <h2>Search</h2>
-    <input type="input" id="search">
-    <button id="search_button">Search</button>
-    <br><br>
-    <a href="manga.html"><img src="" id="cover"></a>
     
+    <div class="results" id="results"></div>
     
-    <div class="results" id="results">
-    </div>
-    
-    <div class="discovery">
-    
-    </div>
-   
-    
+    <div class="discovery"></div>
 </body>
 </html>
