@@ -74,6 +74,16 @@ export async function getSuggestions(searchContent)
     else
     {
         console.log("empty");
+        if(!resultsContainer.firstChild)
+        {
+            let placeholder = document.createElement("span");
+            placeholder.classList.add("results_placeholder");
+            let text = document.createElement("h1");
+            text.textContent = "Start your manga search...";
+            placeholder.appendChild(text);
+
+            resultsContainer.appendChild(placeholder);
+        }
     }
 
 

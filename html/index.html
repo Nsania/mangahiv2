@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manga-Hi</title>
     <script type="module" src="../js/searchManga.js" defer></script>
     
@@ -13,7 +14,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
     
+    <!--icon-->
+    <script src="https://kit.fontawesome.com/c9cfc6f8e5.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="header">
@@ -22,19 +28,47 @@
                 <img src="/images/laura.png">
                 <h1>MangaHi</h1>
             </span>
-           
-        
+            
             <span class="search_container">
-                <input type="search" id="search">
-                <button id="search_button">Search</button>
+                <label for="search" class="big_screen">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </label>
+                <input type="input" id="search" placeholder="Search" autocomplete="off">
+            </span>
+            
+            
+            <label for="search_smol" class="smol_screen">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </label>
+            <span class="search_container_smol">
+                <label for="search_smol" class="smol_screen_label">
+                    <input type="input" id="search_smol" placeholder="Search" autocomplete="off">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </label>
             </span>
         </span>
     </header>
     
-    <h1>Welcome to Manga-Hi</h1>
+    <div class="results" id="results">
+        <span class="results_placeholder"><h1>Start your manga search...</h1></span>
+        <span class="results_skeleton">
+            <div class="image_skeleton"></div>
+            <div class="text_skeleton"></div>
+        </span>
+    </div>
     
-    <div class="results" id="results"></div>
+    <div class="featured_container">
+        <div class="featured">
+        
+        </div>
+    </div>
     
-    <div class="discovery"></div>
+    <div class="discovery_container">
+        <h1>Discovery</h1>
+        <div class="discovery">
+        
+        </div>
+    </div>
+   
 </body>
 </html>

@@ -1,7 +1,11 @@
 import {getSuggestions, searchManga, getRandomManga} from "./functions.js";
 
 const searchBar = document.getElementById("search");
-const searchButton = document.getElementById("search_button");
+const searchContainer = document.querySelector(".search_container");
+const searchBarSmol = document.getElementById("search_smol");
+const searchContainerSmol = document.querySelector(".search_container_smol");
+
+//const searchButton = document.getElementById("search_button");
 const cover_container = document.getElementById("cover");
 const resultsContainer = document.getElementById("results");
 const discovery = document.querySelector(".discovery");
@@ -21,7 +25,7 @@ function printInput()
     inputBuffer = ''; // Clear the buffer after printing
 }
 
-function handleInput()
+function handleInput(searchBar)
 {
     const inputValue = searchBar.value;
 
@@ -37,20 +41,56 @@ function handleInput()
         timeoutId = setTimeout(printInput, 500); // Print the input after half a second
     }
 }
+resultsContainer.style.visibility = "hidden";
+//searchBar.style.visibility = "hidden";
 
-searchBar.addEventListener("input", handleInput);
-
-
-searchButton.addEventListener("click", function()
+searchBarSmol.addEventListener("input", function()
 {
-    title = searchBar.value;
-    if(title.trim() !== "")
-    {
-        window.location.href = `search.html?search=${title}`;
-    }
-    //searchManga(title, cover_container);
+    handleInput(searchBarSmol);
+    //resultsContainer.style.height = "700px";
 });
 
-getRandomManga(discovery);
-getRandomManga(discovery);
-getRandomManga(discovery);
+searchBarSmol.addEventListener("focus", function()
+{
+    searchContainerSmol.style.opacity = "1";
+    resultsContainer.style.visibility = "visible";
+    resultsContainer.style.opacity = "1";
+})
+
+searchBarSmol.addEventListener("blur", function()
+{
+    searchContainerSmol.style.opacity = "0";
+    resultsContainer.style.visibility = "hidden";
+    resultsContainer.style.opacity = "0";
+});
+
+searchBar.addEventListener("input", function()
+{
+    handleInput(searchBar);
+    resultsContainer.style.height = "700px";
+});
+
+searchBar.addEventListener("focus", function()
+{
+    resultsContainer.style.visibility = "visible";
+    searchContainer.style.width = "500px";
+    resultsContainer.style.height = "80px";
+    resultsContainer.style.opacity = "1";
+    searchBar.style.visibility = "visible";
+});
+
+searchBar.addEventListener("blur", function()
+{
+    resultsContainer.style.visibility = "hidden";
+    searchContainer.style.width = "250px";
+    resultsContainer.style.height = "1px";
+    resultsContainer.style.opacity = "0";
+});
+
+
+// getRandomManga(discovery);
+// getRandomManga(discovery);
+// getRandomManga(discovery);
+// getRandomManga(discovery);
+// getRandomManga(discovery);
+// getRandomManga(discovery);
