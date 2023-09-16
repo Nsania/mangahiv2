@@ -112,14 +112,14 @@ function handleInput(searchBar)
     if (!/  /.test(inputValue))
     {
         inputBuffer = inputValue; // Store the current input in the buffer
-        timeoutId = setTimeout(printInput, 200); // Print the input after half a second
+        timeoutId = setTimeout(printInput, 500); // Print the input after half a second
     }
 }
 
 
-// getRandomManga(discovery);
-// getRandomManga(discovery);
-// getRandomManga(discovery);
-// getRandomManga(discovery);
-// getRandomManga(discovery);
-// getRandomManga(discovery);
+getRandomManga(discovery);
+getRandomManga(discovery);
+getRandomManga(discovery);
+getRandomManga(discovery);
+getRandomManga(discovery);
+getRandomManga(discovery);

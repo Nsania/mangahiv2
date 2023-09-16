@@ -281,6 +281,7 @@ body
 
 .results
 {
+    top: 55px;
     position: absolute;
     display: flex;
     min-height: 80px;
@@ -426,7 +427,7 @@ body
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 500px;
+    height: 300px;
     width: 100vw;
 }
 
@@ -455,30 +456,62 @@ body
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 .discovery_container>h1
 {
-    width: 70vw;
     text-align: left;
+    width: 100vw;
 }
 
-
-.discovery>div>a, .discovery>div>a>img
+.discovery
 {
-    height: 320px;
-    width: 224px;
+    display: flex;
+    min-height: 100px;
+    width: 100vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #312c3a;
 }
+
+.discovery>div
+{
+    display: flex;
+    flex-direction: row;
+    background-color: #312c3a;
+    width: 95vw;
+    padding: 2px 0px;
+}
+
+.discovery>div>a
+{
+    height: 80px;
+    width: 56px;
+}
+.discovery>div>a>img
+{
+    height: 80px;
+    width: 56px;
+    border-radius: 0.5rem;
+}
+
 
 .discovery>div>h1
 {
-    text-align: start;
-    font-size: 1.5em;
+    line-height: 80px;
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 15ch;
+    max-width: 30ch;
+    padding-left: 10px;
+
+    font-family: 'Josefin Sans', sans-serif;
+    color: white;
+    font-size: 1.2em;
 }
 
 
