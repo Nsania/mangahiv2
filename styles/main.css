@@ -84,7 +84,7 @@ body
 
     opacity: 0;
 
-    transition: opacity 0.1s ease-out;
+    /*transition: opacity 0.1s ease-out;*/
     background-color: #1f1b23;
 }
 
@@ -281,36 +281,30 @@ body
 
 .results
 {
-    z-index: 1;
     position: absolute;
-    top: 56px;
-
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
     min-height: 80px;
     max-height: 700px;
     width: 100vw;
-    background-color: #393443;
-    overflow-y: hidden;
-    padding: 10px;
+
+    flex-direction: column;
+    background-color: transparent;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-    opacity: 0;
-
-    transition: all 0.2s ease;
+    transition: height 1s ease;
 }
 
 .results_placeholder
 {
     height: 80px;
     width: 100%;
-    display: flex;
     align-items: center;
     padding-left: 20px;
     font-family: 'Josefin Sans', sans-serif;
     color: white;
+    background-color: #1f1b23;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }
 
 .results_placeholder>h1
@@ -318,7 +312,29 @@ body
     font-size: 1.2em;
 }
 
-.results>div
+.results_manga
+{
+    z-index: 3;
+    position: relative;
+
+    flex-direction: column;
+    justify-content: flex-start;
+
+    min-height: 80px;
+    max-height: 700px;
+    width: 100vw;
+    overflow-y: hidden;
+    padding: 10px;
+    opacity: 1;
+
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    background-color: #1f1b23;
+
+    transition: all 0.2s ease;
+}
+
+.results_manga>div
 {
     height: 120px;
     display: flex;
@@ -333,7 +349,7 @@ body
     margin-bottom: 5px;
 }
 
-.results>div>a
+.results_manga>div>a
 {
     min-height: 100px;
     max-height: 100px;
@@ -343,12 +359,12 @@ body
     border-radius: 5px;
 }
 
-.results>div>a>img
+.results_manga>div>a>img
 {
     height: 105px;
 }
 
-.results>div>h1
+.results_manga>div>h1
 {
     display: flex;
     align-items: center;
@@ -360,14 +376,15 @@ body
 
 .results_skeleton
 {
-    display: flex;
     align-items: center;
     justify-content: flex-start;
     height: 120px;
     width: 100%;
-    background-color: #63596c;
+    background-color: #1f1b23;
     padding: 10px;
-    border-radius: 0.5rem;
+
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }
 
 .image_skeleton

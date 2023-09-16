@@ -1,8 +1,9 @@
 //library for various function to be used in my manga reader
 export async function getSuggestions(searchContent)
 {
-    const resultsContainer = document.getElementById("results");
-
+    const resultsContainer = document.querySelector(".results_manga");
+    //const results = document.querySelector(".results");
+    let suggestionsArray = [];
 
     while(resultsContainer.firstChild)
     {
@@ -39,6 +40,7 @@ export async function getSuggestions(searchContent)
                             if(json_data2.data.length > 0)
                             {
                                 mangaCoverFileName = json_data2.data[0].attributes.fileName;
+                                suggestionsArray.push({mangaID: mangaID, mangaTitle: mangaTitle, mangaDesc: mangaDesc, mangaCoverFileName: mangaCoverFileName});
                             }
                         }
                         else
@@ -46,47 +48,50 @@ export async function getSuggestions(searchContent)
                             console.log("cover id not found");
                         }
                     }
-
-                    if(mangaCoverFileName != null)
-                    {
-
-                        let suggestion_container = document.createElement("div");
-                        let suggestion_link = document.createElement("a");
-                        suggestion_link.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
-
-                        let suggestion_image = document.createElement("img");
-                        suggestion_image.src = `https://uploads.mangadex.org/covers/${encodeURIComponent(mangaID)}/${encodeURIComponent(mangaCoverFileName)}.256.jpg`;
-                        let suggestion_title = document.createElement("h1");
-                        suggestion_title.textContent = `${mangaTitle}`;
-
-                        suggestion_link.appendChild(suggestion_image);
-                        suggestion_container.appendChild(suggestion_link);
-                        suggestion_container.appendChild(suggestion_title);
-
-                        resultsContainer.appendChild(suggestion_container);
-                    }
                     console.log(mangaTitle);
                     i++;
                 }
+
+                while(resultsContainer.firstChild)
+                {
+                    resultsContainer.removeChild(resultsContainer.firstChild);
+                }
+
+                suggestionsArray.forEach(e => {
+
+                    let suggestion_container = document.createElement("div");
+                    let suggestion_link = document.createElement("a");
+                    suggestion_link.href = `manga2.html?mangaTitle=${e.mangaTitle}&mangaID=${e.mangaID}&coverFileName=${e.mangaCoverFileName}&mangaDesc=${e.mangaDesc}`;
+
+                    let suggestion_image = document.createElement("img");
+                    suggestion_image.src = `https://uploads.mangadex.org/covers/${e.mangaID}/${e.mangaCoverFileName}.256.jpg`;
+                    let suggestion_title = document.createElement("h1");
+                    suggestion_title.textContent = `${e.mangaTitle}`;
+
+                    suggestion_link.appendChild(suggestion_image);
+                    suggestion_container.appendChild(suggestion_link);
+                    suggestion_container.appendChild(suggestion_title);
+
+                    resultsContainer.appendChild(suggestion_container);
+                });
             }
         }
     }
-    else
+    /*else
     {
         console.log("empty");
         if(!resultsContainer.firstChild)
         {
-            let placeholder = document.createElement("span");
+            /!*let placeholder = document.createElement("span");
             placeholder.classList.add("results_placeholder");
             let text = document.createElement("h1");
             text.textContent = "Start your manga search...";
-            placeholder.appendChild(text);
+            placeholder.appendChild(text);*!/
 
             resultsContainer.appendChild(placeholder);
         }
-    }
-
-
+    }*/
+    return 1;
 }
 
 //this method will search for the manga ID, cover ID, cover file name. It will display the cover art in the image container
