@@ -456,13 +456,17 @@ body
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: #312c3a;
+    padding-top: 20px;
 }
 
 .discovery_container>h1
 {
     text-align: left;
     width: 100vw;
+    font-family: 'Josefin Sans', sans-serif;
+    color: white;
+    padding-left: 10px;
 }
 
 .discovery
