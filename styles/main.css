@@ -12,13 +12,6 @@ body
 }
 
 /*-----------------------------------------------------------------------------------------------------------------*/
-#chapterList
-{
-    display: flex;
-    flex-direction: column;
-}
-
-
 #chapter_select_list
 {
     display: flex;
@@ -36,6 +29,8 @@ body
 /*FOR INDEX.HTML*/
 .header
 {
+    position: sticky;
+    top: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,6 +41,7 @@ body
 
 .title_container
 {
+    z-index: 6;
     width: 190px;
     display: flex;
     justify-content: center;
@@ -53,6 +49,7 @@ body
     font-family: 'Roboto', sans-serif;
     font-size: 0.8em;
     color: white;
+    text-decoration: none;
 }
 
 .title_container>img
@@ -88,11 +85,21 @@ body
     background-color: #1f1b23;
 }
 
+.smol_screen
+{
+    z-index: 8;
+    height: 40px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
 .smol_screen>i
 {
     color: white;
     font-size: 1.2em;
-    margin-right: 20px;
 }
 
 .smol_screen_label
@@ -105,14 +112,6 @@ body
     width: 95%;
     background-color: #312c3a;
     border-radius: 0.5rem;
-}
-
-.smol_screen_label>i
-{
-    position: absolute;
-    right: 20px;
-    font-size: 1.2em;
-    color: #af72f1;
 }
 
 .smol_screen_label>input
@@ -281,9 +280,10 @@ body
 
 .results
 {
-    top: 55px;
-    position: absolute;
-    display: flex;
+    z-index: 100;
+    top: 56px;
+    position: sticky;
+    /*display: flex;*/
     min-height: 80px;
     max-height: 700px;
     width: 100vw;
@@ -421,7 +421,6 @@ body
     }
 }
 
-
 .featured_container
 {
     display: flex;
@@ -448,6 +447,8 @@ body
     }
 }
 
+
+
 .discovery_container
 {
     min-height: 500px;
@@ -469,15 +470,52 @@ body
     padding-left: 10px;
 }
 
-.discovery
+.discovery_skeleton
+{
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100px;
+    width: 100vw;
+    background-color: transparent;
+    padding: 20px 10px;
+}
+
+.div_skeleton
 {
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2px 0px;
+}
+
+.discovery_image_skeleton
+{
+    height: 80px;
+    width: 56px;
+    background-color: transparent;
+    border-radius: 0.5rem;
+    animation: skeleton-loading 1s ease-out infinite;
+}
+
+.discovery_text_skeleton
+{
+    height: 20px;
+    width: 200px;
+    background-color: transparent;
+    margin-left: 10px;
+    border-radius: 0.5rem;
+    animation: skeleton-loading 1s ease-out infinite;
+}
+
+.discovery
+{
     min-height: 100px;
     width: 100vw;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 20px 10px;
     background-color: #312c3a;
 }
 
@@ -485,21 +523,27 @@ body
 {
     display: flex;
     flex-direction: row;
+    width: 100%;
     background-color: #312c3a;
-    width: 95vw;
     padding: 2px 0px;
 }
 
 .discovery>div>a
 {
-    height: 80px;
-    width: 56px;
+    min-height: 80px;
+    min-width: 56px;
+    max-height: 80px;
+    max-width: 56px;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
 }
 .discovery>div>a>img
 {
-    height: 80px;
-    width: 56px;
+    height: 100%;
+    width: 100%;
     border-radius: 0.5rem;
+    object-fit: cover;
 }
 
 
@@ -518,6 +562,112 @@ body
     font-size: 1.2em;
 }
 
+
+
+/*-----------------------------------------------------------------------------------------------------------------*/
+@media screen and (min-width: 600px)
+{
+    #manga2_body
+    {
+        background-color: red;
+    }
+}
+
+/*manga2*/
+#manga2_body
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image_and_title_container
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 70vw;
+    width: 95vw;
+}
+
+.image_and_title_container>img
+{
+    height: 55vw;
+    border-radius: 0.5rem;
+}
+
+.image_and_title_container>h1
+{
+    height: 55vw;
+    color: white;
+    font-size: 2em;
+    padding-top: 50px;
+    font-family: 'Josefin Sans', sans-serif;
+    padding-left: 20px;
+}
+
+.manga_desc_container
+{
+    height: 40vw;
+    width: 95vw;
+    overflow: auto;
+    padding: 20px 0;
+}
+
+.manga_desc_container>p
+{
+    font-size: 1.5rem;
+    color: white;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#chapters_header
+{
+    display: flex;
+    align-items: center;
+    width: 95vw;
+    height: 50px;
+    font-size: 2rem;
+    font-family: 'Josefin Sans', sans-serif;
+    color: white;
+    margin-top: 30px;
+}
+
+#chapterList
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #312c3a;
+}
+
+#chapterList>a
+{
+    line-height: 100px;
+    background-color: #1f1b23;
+    height: 100px;
+    width: 95vw;
+    font-size: 1.5rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 20px;
+    border-radius: 0.5rem;
+    font-family: 'Josefin Sans', sans-serif;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.test
+{
+    background-color: red;
+}
 
 
 /*-----------------------------------------------------------------------------------------------------------------*/

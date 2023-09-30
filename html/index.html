@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manga-Hi</title>
-    <script type="module" src="../js/searchManga.js" defer></script>
+    
     
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="icon" type="image/png" href="/images/Laura/favicon-32x32.png">
@@ -20,14 +20,18 @@
     
     <!--icon-->
     <script src="https://kit.fontawesome.com/c9cfc6f8e5.js" crossorigin="anonymous"></script>
+    
+    <script type="module" src="../js/searchManga.js" defer></script>
+    
 </head>
 <body>
     <header class="header">
         <span class="header_content_container">
-            <span class="title_container">
+            
+            <a href="index.html" class="title_container">
                 <img src="/images/laura.png">
                 <h1>MangaHi</h1>
-            </span>
+            </a>
             
             <span class="search_container">
                 <label for="search" class="big_screen">
@@ -38,12 +42,11 @@
             
             
             <label for="search_smol" class="smol_screen">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-magnifying-glass" id="search_icon"></i>
             </label>
             <span class="search_container_smol">
-                <label for="search_smol" class="smol_screen_label">
+                <label class="smol_screen_label">
                     <input type="input" id="search_smol" placeholder="Search" autocomplete="off">
-                    <i class="fa-solid fa-magnifying-glass"></i>
                 </label>
             </span>
         </span>
@@ -58,19 +61,27 @@
         <span class="results_manga"></span>
     </div>
     
-    
-    <div class="featured_container">
-        <div class="featured">
+    <div class="below_header">
+        <div class="featured_container">
+            <div class="featured">
+            
+            </div>
+        </div>
         
+        <div class="discovery_container">
+            <h1>Discovery</h1>
+            <div class="discovery_skeleton">
+                <div class="div_skeleton"><div class="discovery_image_skeleton"></div><div class="discovery_text_skeleton"></div></div>
+                <div class="div_skeleton"><div class="discovery_image_skeleton"></div><div class="discovery_text_skeleton"></div></div>
+                <div class="div_skeleton"><div class="discovery_image_skeleton"></div><div class="discovery_text_skeleton"></div></div>
+                <div class="div_skeleton"><div class="discovery_image_skeleton"></div><div class="discovery_text_skeleton"></div></div>
+                <div class="div_skeleton"><div class="discovery_image_skeleton"></div><div class="discovery_text_skeleton"></div></div>
+                <div class="div_skeleton"><div class="discovery_image_skeleton"></div><div class="discovery_text_skeleton"></div></div>
+            </div>
+            <div class="discovery">
+            
+            </div>
         </div>
     </div>
-    
-    <div class="discovery_container">
-        <h1>Discovery</h1>
-        <div class="discovery">
-        
-        </div>
-    </div>
-   
 </body>
 </html>

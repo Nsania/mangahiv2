@@ -10,17 +10,53 @@ const resultsManga = document.querySelector(".results_manga");
 const resultsSkeleton = document.querySelector(".results_skeleton");
 const resultsPlaceHolder = document.querySelector(".results_placeholder");
 const discovery = document.querySelector(".discovery");
+const discoverySkeleton = document.querySelector(".discovery_skeleton");
+
+const searchIconLabel = document.querySelector(".smol_screen");
+const searchBarSmolLabel = document.querySelector(".smol_screen_label");
+const searchIcon = document.querySelector("#search_icon");
+const titleContainer = document.querySelector(".title_container");
 
 let title;
 let inputBuffer = ''; // Store the input in a buffer
 let timeoutId; // Store the timeout ID
 
-
+resultsContainer.style.display = "none";
 resultsContainer.style.visibility = "visible";
 resultsManga.style.display = "none";
 resultsSkeleton.style.display = "none";
 resultsPlaceHolder.style.display = "none";
-//searchBar.style.visibility = "hidden";
+discovery.style.display = "none";
+searchBarSmol.style.display = "none";
+searchBarSmolLabel.style.display = "none";
+
+let isDiscoveryDone = false;
+
+for(let i = 0; i < 6; i++)
+{
+    await getRandomManga(discovery);
+    if(i === 5)
+    {
+        isDiscoveryDone = true;
+    }
+}
+
+if(isDiscoveryDone)
+{
+    discoverySkeleton.style.display = "none";
+    discovery.style.display = "flex";
+}
+
+searchIconLabel.addEventListener("click", function()
+{
+    searchBarSmol.style.display = "flex";
+    searchBarSmolLabel.style.display = "flex";
+    searchIcon.style.color = "#af72f1";
+    titleContainer.style.zIndex = "5";
+    resultsContainer.style.display = "flex";
+    console.log("Hello");
+})
+
 
 searchBarSmol.addEventListener("input", function()
 {
@@ -46,6 +82,12 @@ searchBarSmol.addEventListener("blur", function()
     resultsContainer.style.visibility = "hidden";
     resultsContainer.style.opacity = "0";
     resultsPlaceHolder.style.display = "none";
+
+    searchBarSmolLabel.style.display = "none";
+    searchBarSmol.style.display = "none";
+    searchIcon.style.color = "white";
+    titleContainer.style.zIndex = "6";
+    resultsContainer.style.display = "none";
 });
 
 searchBar.addEventListener("input", function()
@@ -115,11 +157,3 @@ function handleInput(searchBar)
         timeoutId = setTimeout(printInput, 500); // Print the input after half a second
     }
 }
-
-
-getRandomManga(discovery);
-getRandomManga(discovery);
-getRandomManga(discovery);
-getRandomManga(discovery);
-getRandomManga(discovery);
-getRandomManga(discovery);
