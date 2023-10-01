@@ -370,3 +370,169 @@ export async function getRandomManga(container)
         container.appendChild(panel);
     }
 }
+
+export function displayScroll()
+{
+    window.addEventListener("scroll", function()
+    {
+        const scrollY = window.scrollY;
+        console.log(scrollY);
+    })
+}
+
+export function initialScroll()
+{
+    const initialScrollY = 1;
+    window.addEventListener("scroll", function()
+    {
+        const scrollY = window.scrollY;
+        if(scrollY < initialScrollY)
+        {
+            window.scrollTo(0, initialScrollY);
+        }
+    })
+}
+
+export function headerFunctionalities()
+{
+    const searchBar = document.getElementById("search");
+    const searchContainer = document.querySelector(".search_container");
+    const searchBarSmol = document.getElementById("search_smol");
+    const searchContainerSmol = document.querySelector(".search_container_smol");
+    const cover_container = document.getElementById("cover");
+    const resultsContainer = document.querySelector(".results");
+    const resultsManga = document.querySelector(".results_manga");
+    const resultsSkeleton = document.querySelector(".results_skeleton");
+    const resultsPlaceHolder = document.querySelector(".results_placeholder");
+    const searchIconLabel = document.querySelector(".smol_screen");
+    const searchBarSmolLabel = document.querySelector(".smol_screen_label");
+    const searchIcon = document.querySelector("#search_icon");
+    const titleContainer = document.querySelector(".title_container");
+
+    let title;
+    let inputBuffer = ''; // Store the input in a buffer
+    let timeoutId; // Store the timeout ID
+
+    resultsContainer.style.display = "none";
+    resultsContainer.style.visibility = "invisible";
+    resultsManga.style.display = "none";
+    resultsSkeleton.style.display = "none";
+    resultsPlaceHolder.style.display = "none";
+    searchBarSmol.style.display = "none";
+    searchBarSmolLabel.style.display = "none";
+
+
+    searchIconLabel.addEventListener("click", function()
+    {
+        searchBarSmol.style.display = "flex";
+        searchBarSmolLabel.style.display = "flex";
+        searchIcon.style.color = "#af72f1";
+        titleContainer.style.zIndex = "5";
+        resultsContainer.style.display = "flex";
+        console.log("Hello");
+    })
+
+
+    searchBarSmol.addEventListener("input", function()
+    {
+        handleInput(searchBarSmol);
+    });
+
+    searchBarSmol.addEventListener("focus", function()
+    {
+        searchContainerSmol.style.opacity = "1";
+        resultsContainer.style.visibility = "visible";
+        resultsContainer.style.opacity = "1";
+
+        if(!resultsManga.firstChild)
+        {
+            resultsPlaceHolder.style.display = "flex";
+        }
+    })
+
+    searchBarSmol.addEventListener("blur", function () {
+        searchContainerSmol.style.opacity = "0";
+        resultsContainer.style.visibility = "hidden";
+        resultsContainer.style.opacity = "0";
+        resultsPlaceHolder.style.display = "none";
+
+        searchBarSmolLabel.style.display = "none";
+        searchBarSmol.style.display = "none";
+        searchIcon.style.color = "white";
+        titleContainer.style.zIndex = "6";
+
+        setTimeout(function()
+        {
+            resultsContainer.style.display = "none";
+        }, 100);
+    });
+
+    searchBar.addEventListener("input", function()
+    {
+        handleInput(searchBar);
+        resultsContainer.style.height = "700px";
+    });
+
+    searchBar.addEventListener("focus", function()
+    {
+        resultsContainer.style.visibility = "visible";
+        searchContainer.style.width = "500px";
+        resultsContainer.style.height = "80px";
+        resultsContainer.style.opacity = "1";
+        searchBar.style.visibility = "visible";
+    });
+
+    searchBar.addEventListener("blur", function()
+    {
+        resultsContainer.style.visibility = "hidden";
+        searchContainer.style.width = "250px";
+        resultsContainer.style.height = "1px";
+        resultsContainer.style.opacity = "0";
+    });
+
+    async function printInput()
+    {
+        if (inputBuffer.trim() !== '')
+        {
+            resultsManga.style.display = "none";
+            resultsPlaceHolder.style.display = "none";
+            resultsSkeleton.style.display = "flex";
+            console.log(`Input:${inputBuffer}`);
+            let query = await getSuggestions(inputBuffer);
+            if(query === 1)
+            {
+                resultsSkeleton.style.display = "none";
+                resultsManga.style.display = "flex";
+            }
+        }
+        else
+        {
+            console.log("Hello");
+            resultsManga.style.display = "none";
+            while(resultsManga.firstChild)
+            {
+                resultsManga.removeChild(resultsManga.firstChild);
+            }
+            resultsPlaceHolder.style.display = "flex";
+        }
+        inputBuffer = ''; // Clear the buffer after printing
+    }
+
+    function handleInput(searchBar)
+    {
+        const inputValue = searchBar.value;
+
+        if(timeoutId)
+        {
+            clearTimeout(timeoutId); // Clear the previous timeout
+        }
+
+        // Use a regular expression to check for consecutive spaces
+        if (!/  /.test(inputValue))
+        {
+            inputBuffer = inputValue; // Store the current input in the buffer
+            timeoutId = setTimeout(printInput, 500); // Print the input after half a second
+        }
+    }
+
+}

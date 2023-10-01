@@ -1,4 +1,4 @@
-import {getPages, loadChapters} from "./functions.js";
+import {getPages, loadChapters, headerFunctionalities, initialScroll} from "./functions.js";
 
 const query = window.location.search;
 const search = new URLSearchParams(query);
@@ -23,9 +23,14 @@ const chapterSelectButton = document.getElementById("chapter_select_drop_down");
 const chapterSelectLabel = document.getElementById("chapter_selected");
 const chapterSelectList = document.getElementById("chapter_select_list");
 
+const header = document.querySelector(".header");
+
 chapterSelectLabel.textContent = `Chapter ${chapter}: ${chapterTitle}`;
 
 let chaptersArray = await loadChapters(mangaID);
+
+initialScroll();
+headerFunctionalities();
 
 chaptersArray.forEach(e => {
     let option = document.createElement("a");

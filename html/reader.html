@@ -2,36 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     
     <link rel="stylesheet" href="/styles/main.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    
+    <!--icon-->
+    <script src="https://kit.fontawesome.com/c9cfc6f8e5.js" crossorigin="anonymous"></script>
+    
+    <script type="module" src="../js/getPages.js" async></script>
 </head>
 <body>
-    <h1>Reader</h1>
-    <a href="index.html"><button>Home</button></a>
-    <button id="previous_button">Previous</button>
-    <button id="next_button">Next</button>
-    <button id="chapter_list_button">Chapter List</button>
-    <br>
+    <header class="header">
+        <span class="header_content_container">
+            
+            <a href="index.html" class="title_container">
+                <img src="/images/laura.png">
+                <h1>MangaHi</h1>
+            </a>
+            
+            <span class="search_container">
+                <label for="search" class="big_screen">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </label>
+                <input type="input" id="search" placeholder="Search" autocomplete="off">
+            </span>
+            
+            
+            <label for="search_smol" class="smol_screen">
+                <i class="fa-solid fa-magnifying-glass" id="search_icon"></i>
+            </label>
+            <span class="search_container_smol">
+                <label class="smol_screen_label">
+                    <input type="input" id="search_smol" placeholder="Search" autocomplete="off">
+                </label>
+            </span>
+        </span>
+    </header>
     
-    <div class="chapter_select_container">
-        <label id="chapter_selected" for="chapter_select_drop_down"></label>
-        <button id="chapter_select_drop_down">More</button>
-        <br>
-        <div id="chapter_select_list">
+    <div class="results" id="results">
+        <span class="results_placeholder"><h1>Start your manga search...</h1></span>
+        <span class="results_skeleton">
+            <div class="image_skeleton"></div>
+            <div class="text_skeleton"></div>
+        </span>
+        <span class="results_manga"></span>
+    </div>
+    
+    <div class="reader_content">
+        <div class="controls">
+            <button id="previous_button"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="chapter_select_container">
+                <label id="chapter_selected" for="chapter_select_drop_down"></label>
+                <button id="chapter_select_drop_down"><i class="fa-solid fa-caret-down"></i></button>
+            </div>
+            <button id="next_button"><i class="fa-solid fa-chevron-right"></i></button>
+            <button id="chapter_list_button"><i class="fa-solid fa-list"></i></button>
         
+        </div>
+        
+        <div id="chapter_select_list">
+        </div>
+        <div id="reader">
+        </div>
+        
+        <div class="controls_bot">
+            <button id="previous_button2">Previous</button>
+            <button id="next_button2">Next</button>
+            <button id="chapter_list_button2"><i class="fa-solid fa-list"></i></button>
         </div>
     </div>
     
     
-    <div id="reader">
-    </div>
-    
-    <button id="previous_button2">Previous</button>
-    <button id="next_button2">Next</button>
-    <button id="chapter_list_button2">Chapter List</button>
-  
-  
-  <script type="module" src="../js/getPages.js"></script>
 </body>
 </html>

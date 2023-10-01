@@ -12,23 +12,11 @@ body
 }
 
 /*-----------------------------------------------------------------------------------------------------------------*/
-#chapter_select_list
-{
-    display: flex;
-    flex-direction: column;
-    max-height: 10vh;
-    overflow-x: auto;
-}
-
-#reader>img
-{
-    width: 100vw;
-    height: 80vh;
-}
 /*-----------------------------------------------------------------------------------------------------------------*/
 /*FOR INDEX.HTML*/
 .header
 {
+    z-index: 100;
     position: sticky;
     top: 0px;
     display: flex;
@@ -670,4 +658,126 @@ body
 }
 
 
-/*-----------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------Reader-------------------------------------------------------*/
+.reader_content
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls
+{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+#previous_button
+{
+    height: 45px;
+    width: 45px;
+    border: none;
+    border-radius: 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.chapter_select_container
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
+    width: 200px;
+    background-color: #1f1b23;
+    border-radius: 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#chapter_select_drop_down
+{
+    height: 45px;
+    width: 45px;
+    border: none;
+    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+#chapter_selected
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 80%;
+    background-color: transparent;
+    color: white;
+    font-family: 'Josefin Sans', sans-serif;
+    padding-top: 5px;
+}
+
+#chapter_select_list
+{
+    z-index: 1;
+    top: 106px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    min-height: 10vh;
+    max-height: 80vh;
+    width: 100vw;
+    background-color: green;
+    overflow: auto;
+    border-radius: 0.5rem;
+    padding: 5px;
+}
+
+#chapter_select_list>a
+{
+    text-decoration: none;
+    color: white;
+    font-family: 'Josefin Sans', sans-serif;
+    width: 100%;
+    background-color: red;
+    margin-top: 5px;
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+
+#next_button
+{
+    height: 45px;
+    width: 45px;
+    border: none;
+    border-radius: 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#chapter_list_button
+{
+    height: 45px;
+    width: 45px;
+    border: none;
+    border-radius: 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#reader>img
+{
+    height: 65vh;
+    width: 100vw;
+    object-fit: contain;
+    background-color: white;
+}
+
+
