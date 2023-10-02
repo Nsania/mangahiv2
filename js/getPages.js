@@ -29,7 +29,6 @@ chapterSelectLabel.textContent = `Chapter ${chapter}: ${chapterTitle}`;
 
 let chaptersArray = await loadChapters(mangaID);
 
-initialScroll();
 headerFunctionalities();
 
 chaptersArray.forEach(e => {

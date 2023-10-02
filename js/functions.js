@@ -421,6 +421,22 @@ export function headerFunctionalities()
     searchBarSmol.style.display = "none";
     searchBarSmolLabel.style.display = "none";
 
+    resultsContainer.style.position = "absolute";
+
+    window.addEventListener("scroll", function()
+    {
+        const scrollYValue = window.scrollY;
+
+        if(scrollYValue === 0)
+        {
+            resultsContainer.style.position = "absolute";
+        }
+        else
+        {
+            resultsContainer.style.position = "sticky";
+        }
+    })
+
 
     searchIconLabel.addEventListener("click", function()
     {
@@ -440,17 +456,19 @@ export function headerFunctionalities()
 
     searchBarSmol.addEventListener("focus", function()
     {
+        document.body.classList.add("disableScroll");
         searchContainerSmol.style.opacity = "1";
         resultsContainer.style.visibility = "visible";
         resultsContainer.style.opacity = "1";
-
         if(!resultsManga.firstChild)
         {
             resultsPlaceHolder.style.display = "flex";
         }
     })
 
-    searchBarSmol.addEventListener("blur", function () {
+    searchBarSmol.addEventListener("blur", function ()
+    {
+        document.body.classList.remove("disableScroll");
         searchContainerSmol.style.opacity = "0";
         resultsContainer.style.visibility = "hidden";
         resultsContainer.style.opacity = "0";

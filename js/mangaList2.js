@@ -21,6 +21,5 @@ description.innerHTML = mangaDesc;
 const cover = document.getElementById("cover_art");
 cover.src = `https://uploads.mangadex.org/covers/${mangaID}/${coverFileName}.256.jpg`;
 
-initialScroll();
 headerFunctionalities();
 getChapters(mangaID);

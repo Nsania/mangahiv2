@@ -11,6 +11,11 @@ body
     background-color: #312c3a;
 }
 
+.disableScroll
+{
+    overflow: hidden;
+}
+
 /*-----------------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------------*/
 /*FOR INDEX.HTML*/
@@ -270,7 +275,7 @@ body
 {
     z-index: 100;
     top: 56px;
-    position: sticky;
+    /*position: absolute;*/
     /*display: flex;*/
     min-height: 80px;
     max-height: 700px;
@@ -670,21 +675,29 @@ body
 .controls
 {
     height: 50px;
+    width: 100vw;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     background-color: transparent;
+    padding-right: 1px;
 }
 
 #previous_button
 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 45px;
     width: 45px;
     border: none;
     border-radius: 0.5rem;
     margin-left: 5px;
     margin-right: 5px;
+    background-color: #645a6d;
+    color: white;
+    font-size: 20px
 }
 
 .chapter_select_container
@@ -694,7 +707,8 @@ body
     justify-content: space-between;
     align-items: center;
     height: 45px;
-    width: 200px;
+    min-width: 50%;
+    max-width: 70%;
     background-color: #1f1b23;
     border-radius: 0.5rem;
     margin-left: 5px;
@@ -703,16 +717,23 @@ body
 
 #chapter_select_drop_down
 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 45px;
     width: 45px;
     border: none;
     border-bottom-right-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
+    background-color: #645a6d;
+    color: white;
+    font-size: 20px;
 }
 
 #chapter_selected
 {
-    display: flex;
+    /*display: flex;*/
+    line-height: 40px;
     justify-content: center;
     align-items: center;
     height: 100%;
@@ -721,6 +742,13 @@ body
     color: white;
     font-family: 'Josefin Sans', sans-serif;
     padding-top: 5px;
+    padding-left: 10px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 12ch;
+    max-width: 30ch;
 }
 
 #chapter_select_list
@@ -733,7 +761,7 @@ body
     min-height: 10vh;
     max-height: 80vh;
     width: 100vw;
-    background-color: green;
+    background-color: #1f1b23;
     overflow: auto;
     border-radius: 0.5rem;
     padding: 5px;
@@ -741,35 +769,55 @@ body
 
 #chapter_select_list>a
 {
+    line-height: 5px;
     text-decoration: none;
     color: white;
     font-family: 'Josefin Sans', sans-serif;
-    width: 100%;
-    background-color: red;
+    background-color: #63596c;
     margin-top: 5px;
     font-size: 1.2rem;
-    padding: 5px;
+    padding: 20px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 20ch;
+    max-width: 40ch;
+    border-radius: 0.5rem;
+
 }
 
 
 #next_button
 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 45px;
     width: 45px;
     border: none;
     border-radius: 0.5rem;
     margin-left: 5px;
     margin-right: 5px;
+    background-color: #645a6d;
+    color: white;
+    font-size: 20px;
 }
 
 #chapter_list_button
 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 45px;
     width: 45px;
     border: none;
     border-radius: 0.5rem;
     margin-left: 5px;
     margin-right: 5px;
+    background-color: #645a6d;
+    color: white;
+    font-size: 20px;
 }
 
 #reader>img

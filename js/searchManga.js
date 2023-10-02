@@ -4,7 +4,6 @@ import {getRandomManga, initialScroll, headerFunctionalities} from "./functions.
 const discovery = document.querySelector(".discovery");
 const discoverySkeleton = document.querySelector(".discovery_skeleton");
 
-initialScroll();
 headerFunctionalities();
 
 discovery.style.display = "none";
