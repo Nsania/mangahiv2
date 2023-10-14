@@ -12,7 +12,7 @@ export async function getSuggestions(searchContent)
 
     if(searchContent.trim() !== '')
     {
-        let response = await fetch(`https://api.mangadex.org/manga?title=${searchContent}&limit=5`);
+        let response = await fetch(`http://localhost:3000/manga-proxy?title=${searchContent}&limit=5`);
 
         if(response.ok)
         {
@@ -31,7 +31,7 @@ export async function getSuggestions(searchContent)
 
                     if(mangaID != null)
                     {
-                        let response2 = await fetch(`https://api.mangadex.org/cover?limit=1&manga[]=${mangaID}`);
+                        let response2 = await fetch(`http://localhost:4000/cover-proxy?limit=1&manga[]=${mangaID}`);
 
                         if(response2.ok)
                         {
@@ -64,7 +64,7 @@ export async function getSuggestions(searchContent)
                     suggestion_link.href = `manga2.html?mangaTitle=${e.mangaTitle}&mangaID=${e.mangaID}&coverFileName=${e.mangaCoverFileName}&mangaDesc=${e.mangaDesc}`;
 
                     let suggestion_image = document.createElement("img");
-                    suggestion_image.src = `https://uploads.mangadex.org/covers/${e.mangaID}/${e.mangaCoverFileName}.256.jpg`;
+                    suggestion_image.src = `http://localhost:8080/cover-source-proxy?mangaID=${e.mangaID}&coverID=${e.mangaCoverFileName}.256.jpg`;
                     let suggestion_title = document.createElement("h1");
                     suggestion_title.textContent = `${e.mangaTitle}`;
 
@@ -77,20 +77,6 @@ export async function getSuggestions(searchContent)
             }
         }
     }
-    /*else
-    {
-        console.log("empty");
-        if(!resultsContainer.firstChild)
-        {
-            /!*let placeholder = document.createElement("span");
-            placeholder.classList.add("results_placeholder");
-            let text = document.createElement("h1");
-            text.textContent = "Start your manga search...";
-            placeholder.appendChild(text);*!/
-
-            resultsContainer.appendChild(placeholder);
-        }
-    }*/
     return 1;
 }
 
@@ -99,7 +85,7 @@ export async function searchManga(title, container)
 {
     if(title.trim() !== "") {
         // Make a GET request to the MangaDex API search endpoint
-        const response = await fetch(`https://api.mangadex.org/manga?title=${title}&limit=10`);
+        const response = await fetch(`http://localhost:3000/manga-proxy?title=${title}&limit=10`);
         // Check if the request was successful (status code 200)
         if (response.ok) {
             const json_data = await response.json();
@@ -115,7 +101,7 @@ export async function searchManga(title, container)
                     let mangaCoverFileName;
 
                     if (mangaID != null) {
-                        let response2 = await fetch(`https://api.mangadex.org/cover?limit=1&manga[]=${mangaID}`);
+                        let response2 = await fetch(`http://localhost:4000/cover-proxy?limit=1&manga[]=${mangaID}`);
 
                         if(response2.ok)
                         {
@@ -139,7 +125,9 @@ export async function searchManga(title, container)
                         suggestion_link.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
 
                         let suggestion_image = document.createElement("img");
-                        suggestion_image.src = `https://uploads.mangadex.org/covers/${encodeURIComponent(mangaID)}/${encodeURIComponent(mangaCoverFileName)}.256.jpg`;
+                        suggestion_image.src = `http://localhost:8080/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
+                        console.log("Hello");
+                        console.log(`URL: 192.168.111.108:8080/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`);
                         let suggestion_title = document.createElement("h1");
                         suggestion_title.textContent = `${mangaTitle}`;
 
@@ -161,7 +149,7 @@ export async function searchManga(title, container)
 //method will get manga feed (all chapters available)
 export async function getChapters(mangaID)
 {
-    const response = await fetch(`https://api.mangadex.org/manga/${mangaID}/feed?limit=100&translatedLanguage%5B%5D=en`);
+    const response = await fetch(`http://localhost:5000/chapters-proxy?mangaID=${mangaID}`);
 
     localStorage.setItem("mangaID", mangaID);
 
@@ -184,7 +172,7 @@ export async function getChapters(mangaID)
 
         while(i < requests)
         {
-            const response2 = await fetch(`https://api.mangadex.org/manga/${mangaID}/feed?limit=100&offset=${offset}&translatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc`);
+            const response2 = await fetch(`http://localhost:5000/chapters-proxy?mangaID=${mangaID}&limit=100&offset=${offset}&translatedLanguage[]=en&includeFutureUpdates=1&order[createdAt]=asc&order[updatedAt]=asc&order[publishAt]=asc&order[readableAt]=asc&order[volume]=asc&order[chapter]=asc`);
 
             if(response2.ok)
             {
@@ -233,8 +221,7 @@ export async function getChapters(mangaID)
 //method will get pages for each chapter
 export async function getPages(mangaChapterID)
 {
-
-    const response = await fetch(`https://api.mangadex.org/at-home/server/${mangaChapterID}`);
+    const response = await fetch(`http://localhost:3128/pages-proxy?mangaChapterID=${mangaChapterID}`);
     let reader = document.getElementById("reader");
 
     if(response.ok)
@@ -252,7 +239,7 @@ export async function getPages(mangaChapterID)
             while(i < json_data.chapter.data.length)
             {
                 let image = document.createElement("img");
-                image.src = `https://uploads.mangadex.org/data/${hash}/${json_data.chapter.data[i]}`;
+                image.src = `http://localhost:8888/pages-source-proxy?hash=${hash}&pageFile=${json_data.chapter.data[i]}`;
 
                 reader.appendChild(image);
                 i++;
@@ -263,7 +250,7 @@ export async function getPages(mangaChapterID)
 
 export async function loadChapters(mangaID)
 {
-    const response = await fetch(`https://api.mangadex.org/manga/${mangaID}/feed?limit=100&translatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc&includeEmptyPages=0`);
+    const response = await fetch(`http://localhost:5000/chapters-proxy?mangaID=${mangaID}&limit=100&translatedLanguage[]=en&includeFutureUpdates=1&order[createdAt]=asc&order[updatedAt]=asc&order[publishAt]=asc&order[readableAt]=asc&order[volume]=asc&order[chapter]=asc`);
 
     let chapters = {};
     let chaptersArray = [];
@@ -284,7 +271,7 @@ export async function loadChapters(mangaID)
 
         while(i < requests)
         {
-            const response2 = await fetch(`https://api.mangadex.org/manga/${mangaID}/feed?limit=100&offset=${offset}&translatedLanguage%5B%5D=en&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc`);
+            const response2 = await fetch(`http://localhost:5000/chapters-proxy?mangaID=${mangaID}&limit=100&offset=${offset}&translatedLanguage%5B%5D=en&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc`);
 
             if(response2.ok)
             {
@@ -320,7 +307,7 @@ export async function loadChapters(mangaID)
 
 export async function getRandomManga(container)
 {
-    const response = await fetch(`https://api.mangadex.org/manga/random`);
+    const response = await fetch(`http://localhost:8081/random-proxy`);
 
     if(response.ok)
     {
@@ -337,7 +324,7 @@ export async function getRandomManga(container)
 
         if(mangaID != null)
         {
-            const response2 = await fetch(`https://api.mangadex.org/cover?limit=1&manga[]=${mangaID}`);
+            const response2 = await fetch(`http://localhost:4000/cover-proxy?limit=1&manga[]=${mangaID}`);
 
 
             if(response2.ok)
@@ -359,7 +346,7 @@ export async function getRandomManga(container)
         let link = document.createElement("a");
         link.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
         let cover = document.createElement("img");
-        cover.src = `https://uploads.mangadex.org/covers/${mangaID}/${mangaCoverFileName}.256.jpg`;
+        cover.src = `http://localhost:8080/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
         let title = document.createElement("h1");
         title.textContent = mangaTitle;
 
