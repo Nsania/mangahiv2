@@ -18,7 +18,7 @@
     <!--icon-->
     <script src="https://kit.fontawesome.com/c9cfc6f8e5.js" crossorigin="anonymous"></script>
     
-    <script type="module" src="../js/getPages.js" async></script>
+    <script type="module" src="../js/getPages.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -71,16 +71,21 @@
         
         <div id="chapter_select_list">
         </div>
+        
+        <div id="reader-skeleton">
+            <div id="page-loading">
+            
+            </div>
+        </div>
         <div id="reader">
         </div>
         
         <div class="controls_bot">
-            <button id="previous_button2">Previous</button>
-            <button id="next_button2">Next</button>
+            <button id="previous_button2"><i class="fa-solid fa-chevron-left"></i></button>
+            <button id="next_button2"><i class="fa-solid fa-chevron-right"></i></button>
             <button id="chapter_list_button2"><i class="fa-solid fa-list"></i></button>
+            <button id="scroll-up"><i class="fa-solid fa-chevron-up"></i></button>
         </div>
     </div>
-    
-    
 </body>
 </html>

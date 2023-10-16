@@ -17,9 +17,23 @@ const header = document.getElementById("header");
 header.innerHTML = mangaTitle;
 const description = document.getElementById("manga_desc");
 description.innerHTML = mangaDesc;
-
+const chapterList = document.getElementById("chapterList");
+const chapterListSkeleton = document.getElementById("chapterList-skeleton");
 const cover = document.getElementById("cover_art");
-cover.src = `https://uploads.mangadex.org/covers/${mangaID}/${coverFileName}.256.jpg`;
+//cover.src = `https://uploads.mangadex.org/covers/${mangaID}/${coverFileName}.256.jpg`;
+cover.src = `http://localhost:3000/cover-source-proxy?mangaID=${mangaID}&coverID=${coverFileName}.256.jpg`;
 
+chapterList.style.display = "none";
+chapterListSkeleton.style.display = "flex";
 headerFunctionalities();
-getChapters(mangaID);
+let getChaptersResult = await getChapters(mangaID);
+
+if(getChaptersResult === 1)
+{
+    chapterListSkeleton.style.display = "none";
+    chapterList.style.display = "flex";
+}
+else
+{
+    console.log("Error retrieving chapters");
+}

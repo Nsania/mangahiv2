@@ -31,7 +31,7 @@ export async function getSuggestions(searchContent)
 
                     if(mangaID != null)
                     {
-                        let response2 = await fetch(`http://localhost:4000/cover-proxy?limit=1&manga[]=${mangaID}`);
+                        let response2 = await fetch(`http://localhost:3000/cover-proxy?limit=1&manga[]=${mangaID}`);
 
                         if(response2.ok)
                         {
@@ -64,7 +64,7 @@ export async function getSuggestions(searchContent)
                     suggestion_link.href = `manga2.html?mangaTitle=${e.mangaTitle}&mangaID=${e.mangaID}&coverFileName=${e.mangaCoverFileName}&mangaDesc=${e.mangaDesc}`;
 
                     let suggestion_image = document.createElement("img");
-                    suggestion_image.src = `http://localhost:8080/cover-source-proxy?mangaID=${e.mangaID}&coverID=${e.mangaCoverFileName}.256.jpg`;
+                    suggestion_image.src = `http://localhost:3000/cover-source-proxy?mangaID=${e.mangaID}&coverID=${e.mangaCoverFileName}.256.jpg`;
                     let suggestion_title = document.createElement("h1");
                     suggestion_title.textContent = `${e.mangaTitle}`;
 
@@ -101,7 +101,7 @@ export async function searchManga(title, container)
                     let mangaCoverFileName;
 
                     if (mangaID != null) {
-                        let response2 = await fetch(`http://localhost:4000/cover-proxy?limit=1&manga[]=${mangaID}`);
+                        let response2 = await fetch(`http://localhost:3000/cover-proxy?limit=1&manga[]=${mangaID}`);
 
                         if(response2.ok)
                         {
@@ -125,9 +125,7 @@ export async function searchManga(title, container)
                         suggestion_link.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
 
                         let suggestion_image = document.createElement("img");
-                        suggestion_image.src = `http://localhost:8080/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
-                        console.log("Hello");
-                        console.log(`URL: 192.168.111.108:8080/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`);
+                        suggestion_image.src = `http://localhost:3000/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
                         let suggestion_title = document.createElement("h1");
                         suggestion_title.textContent = `${mangaTitle}`;
 
@@ -149,7 +147,7 @@ export async function searchManga(title, container)
 //method will get manga feed (all chapters available)
 export async function getChapters(mangaID)
 {
-    const response = await fetch(`http://localhost:5000/chapters-proxy?mangaID=${mangaID}`);
+    const response = await fetch(`http://localhost:3000/chapters-proxy?mangaID=${mangaID}`);
 
     localStorage.setItem("mangaID", mangaID);
 
@@ -172,7 +170,7 @@ export async function getChapters(mangaID)
 
         while(i < requests)
         {
-            const response2 = await fetch(`http://localhost:5000/chapters-proxy?mangaID=${mangaID}&limit=100&offset=${offset}&translatedLanguage[]=en&includeFutureUpdates=1&order[createdAt]=asc&order[updatedAt]=asc&order[publishAt]=asc&order[readableAt]=asc&order[volume]=asc&order[chapter]=asc`);
+            const response2 = await fetch(`http://localhost:3000/chapters-proxy?mangaID=${mangaID}&limit=100&offset=${offset}&translatedLanguage[]=en&includeFutureUpdates=1&order[createdAt]=asc&order[updatedAt]=asc&order[publishAt]=asc&order[readableAt]=asc&order[volume]=asc&order[chapter]=asc`);
 
             if(response2.ok)
             {
@@ -210,7 +208,7 @@ export async function getChapters(mangaID)
             chapterList.appendChild(chapter);
         });
 
-
+        return 1;
     }
     else
     {
@@ -221,7 +219,7 @@ export async function getChapters(mangaID)
 //method will get pages for each chapter
 export async function getPages(mangaChapterID)
 {
-    const response = await fetch(`http://localhost:3128/pages-proxy?mangaChapterID=${mangaChapterID}`);
+    const response = await fetch(`http://localhost:3000/pages-proxy?mangaChapterID=${mangaChapterID}`);
     let reader = document.getElementById("reader");
 
     if(response.ok)
@@ -239,18 +237,20 @@ export async function getPages(mangaChapterID)
             while(i < json_data.chapter.data.length)
             {
                 let image = document.createElement("img");
-                image.src = `http://localhost:8888/pages-source-proxy?hash=${hash}&pageFile=${json_data.chapter.data[i]}`;
+                image.src = `http://localhost:3000/pages-source-proxy?hash=${hash}&pageFile=${json_data.chapter.data[i]}`;
 
                 reader.appendChild(image);
                 i++;
             }
         }
     }
+
+    return 1;
 }
 
 export async function loadChapters(mangaID)
 {
-    const response = await fetch(`http://localhost:5000/chapters-proxy?mangaID=${mangaID}&limit=100&translatedLanguage[]=en&includeFutureUpdates=1&order[createdAt]=asc&order[updatedAt]=asc&order[publishAt]=asc&order[readableAt]=asc&order[volume]=asc&order[chapter]=asc`);
+    const response = await fetch(`http://localhost:3000/chapters-proxy?mangaID=${mangaID}&limit=100&translatedLanguage[]=en&includeFutureUpdates=1&order[createdAt]=asc&order[updatedAt]=asc&order[publishAt]=asc&order[readableAt]=asc&order[volume]=asc&order[chapter]=asc`);
 
     let chapters = {};
     let chaptersArray = [];
@@ -271,7 +271,7 @@ export async function loadChapters(mangaID)
 
         while(i < requests)
         {
-            const response2 = await fetch(`http://localhost:5000/chapters-proxy?mangaID=${mangaID}&limit=100&offset=${offset}&translatedLanguage%5B%5D=en&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc`);
+            const response2 = await fetch(`http://localhost:3000/chapters-proxy?mangaID=${mangaID}&limit=100&offset=${offset}&translatedLanguage%5B%5D=en&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc`);
 
             if(response2.ok)
             {
@@ -307,7 +307,7 @@ export async function loadChapters(mangaID)
 
 export async function getRandomManga(container)
 {
-    const response = await fetch(`http://localhost:8081/random-proxy`);
+    const response = await fetch(`http://localhost:3000/random-proxy`);
 
     if(response.ok)
     {
@@ -324,7 +324,7 @@ export async function getRandomManga(container)
 
         if(mangaID != null)
         {
-            const response2 = await fetch(`http://localhost:4000/cover-proxy?limit=1&manga[]=${mangaID}`);
+            const response2 = await fetch(`http://localhost:3000/cover-proxy?limit=1&manga[]=${mangaID}`);
 
 
             if(response2.ok)
@@ -346,7 +346,7 @@ export async function getRandomManga(container)
         let link = document.createElement("a");
         link.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
         let cover = document.createElement("img");
-        cover.src = `http://localhost:8080/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
+        cover.src = `http://localhost:3000/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
         let title = document.createElement("h1");
         title.textContent = mangaTitle;
 
@@ -423,7 +423,6 @@ export function headerFunctionalities()
             resultsContainer.style.position = "sticky";
         }
     })
-
 
     searchIconLabel.addEventListener("click", function()
     {

@@ -116,6 +116,7 @@ body
     border: none;
     padding-left: 20px;
     color: white;
+    font-size: 1.2rem;
 }
 
 .smol_screen_label>input:focus
@@ -627,9 +628,30 @@ body
     margin-top: 30px;
 }
 
+#chapterList-skeleton
+{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 100vw;
+    background-color: transparent;
+}
+
+.chapterList_container_spinner
+{
+    height: 70px;
+    width: 70px;
+    background-color: transparent;
+    border-radius: 100%;
+    border: 10px solid white;
+    border-top-color: #312c3a;
+    animation: spin 1s ease infinite;
+}
+
+
 #chapterList
 {
-    display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -656,12 +678,6 @@ body
     text-decoration: none;
     font-weight: bold;
 }
-
-.test
-{
-    background-color: red;
-}
-
 
 /*----------------------------------------------------------Reader-------------------------------------------------------*/
 .reader_content
@@ -708,7 +724,7 @@ body
     align-items: center;
     height: 45px;
     min-width: 50%;
-    max-width: 70%;
+    max-width: 55%;
     background-color: #1f1b23;
     border-radius: 0.5rem;
     margin-left: 5px;
@@ -756,7 +772,7 @@ body
     z-index: 1;
     top: 106px;
     position: absolute;
-    display: flex;
+
     flex-direction: column;
     min-height: 10vh;
     max-height: 80vh;
@@ -818,6 +834,111 @@ body
     background-color: #645a6d;
     color: white;
     font-size: 20px;
+}
+
+.controls_bot
+{
+    height: 50px;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    padding-right: 1px;
+}
+
+#previous_button2
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 100px;
+    border: none;
+    border-radius: 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: #645a6d;
+    color: white;
+    font-size: 20px
+}
+
+#next_button2
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 100px;
+    border: none;
+    border-radius: 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: #645a6d;
+    color: white;
+    font-size: 20px;
+}
+
+#chapter_list_button2
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 100px;
+    border: none;
+    border-radius: 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: #645a6d;
+    color: white;
+    font-size: 20px;
+}
+
+#scroll-up
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 100px;
+    border: none;
+    border-radius: 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: #645a6d;
+    color: white;
+    font-size: 20px;
+}
+
+#reader-skeleton
+{
+
+    justify-content: center;
+    align-items: center;
+    height: 87vh;
+    width: 100vw;
+    background-color: transparent;
+}
+
+#page-loading
+{
+    height: 70px;
+    width: 70px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 10px solid #ffffff;
+    border-top-color: #312c3a;
+    animation: spin 1s ease infinite;
+}
+
+@keyframes spin
+{
+    100%
+    {
+        transform: rotate(360deg);
+    }
 }
 
 #reader>img

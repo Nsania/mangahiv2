@@ -1,5 +1,7 @@
 import {getPages, loadChapters, headerFunctionalities, initialScroll} from "./functions.js";
 
+headerFunctionalities();
+
 const query = window.location.search;
 const search = new URLSearchParams(query);
 const mangaChapterID = search.get("chapterID");
@@ -23,13 +25,21 @@ const chapterSelectButton = document.getElementById("chapter_select_drop_down");
 const chapterSelectLabel = document.getElementById("chapter_selected");
 const chapterSelectList = document.getElementById("chapter_select_list");
 
-const header = document.querySelector(".header");
+const readerSkeleton = document.getElementById("reader-skeleton");
+const reader = document.getElementById("reader");
+const scrollUp = document.getElementById("scroll-up");
+
+readerSkeleton.style.display = "flex";
+reader.style.display = "none";
+chapterSelectList.style.display = "none";
+
 
 chapterSelectLabel.textContent = `Chapter ${chapter}: ${chapterTitle}`;
 
 let chaptersArray = await loadChapters(mangaID);
 
-headerFunctionalities();
+
+//headerFunctionalities();
 
 chaptersArray.forEach(e => {
     let option = document.createElement("a");
@@ -61,17 +71,17 @@ console.log(chapterLocation);
 
 chapterSelectList.scrollTop = chapterLocation;
 
-chapterSelectList.style.visibility = 'hidden';
+//chapterSelectList.style.visibility = 'hidden';
 chapterSelectButton.addEventListener('click', function()
 {
-    if(chapterSelectList.style.visibility === 'hidden')
+    if(chapterSelectList.style.display === 'none')
     {
-        chapterSelectList.style.visibility = 'visible'
+        chapterSelectList.style.display = 'flex'
         chapterSelectList.scrollTop = chapterLocation;
     }
     else
     {
-        chapterSelectList.style.visibility = 'hidden';
+        chapterSelectList.style.display = 'none';
     }
 });
 
@@ -124,7 +134,6 @@ if(previousChapterID === -1 && previousChapter === -1)
 
 function loadPreviousChapter(previousChapter, previousChapterID)
 {
-
     window.location.href = `reader.html?&chapter=${previousChapter}&chapterID=${previousChapterID}`
 }
 
@@ -215,6 +224,20 @@ chapterListButton2.addEventListener('click', function()
     goToChapterList(mangaTitle, mangaID, coverFileName, mangaDesc);
 });
 
+scrollUp.addEventListener("click", function()
+{
+   window.scrollTo(0,0);
+});
 
-getPages(mangaChapterID);
+let result = await getPages(mangaChapterID);
+
+if(result === 1)
+{
+    readerSkeleton.style.display = "none";
+    reader.style.display = "block";
+}
+else
+{
+    console.log("No")
+}
 
