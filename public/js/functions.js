@@ -401,10 +401,9 @@ export function headerFunctionalities()
     let timeoutId; // Store the timeout ID
 
     resultsContainer.style.display = "none";
-    resultsContainer.style.visibility = "invisible";
     resultsManga.style.display = "none";
     resultsSkeleton.style.display = "none";
-    resultsPlaceHolder.style.display = "none";
+
     searchBarSmol.style.display = "none";
     searchBarSmolLabel.style.display = "none";
 
@@ -474,24 +473,26 @@ export function headerFunctionalities()
     searchBar.addEventListener("input", function()
     {
         handleInput(searchBar);
-        resultsContainer.style.height = "700px";
     });
 
     searchBar.addEventListener("focus", function()
     {
-        resultsContainer.style.visibility = "visible";
-        searchContainer.style.width = "500px";
-        resultsContainer.style.height = "80px";
-        resultsContainer.style.opacity = "1";
-        searchBar.style.visibility = "visible";
+        searchContainer.style.width = "400px";
+        resultsContainer.style.display = "flex";
+        setTimeout(function()
+        {
+            resultsContainer.style.opacity = "1";
+        }, 100);
     });
 
     searchBar.addEventListener("blur", function()
     {
-        resultsContainer.style.visibility = "hidden";
-        searchContainer.style.width = "250px";
-        resultsContainer.style.height = "1px";
         resultsContainer.style.opacity = "0";
+        searchContainer.style.width = "250px";
+        setTimeout(function()
+        {
+            resultsContainer.style.display = "none";
+        }, 100);
     });
 
     async function printInput()
