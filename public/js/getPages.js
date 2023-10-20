@@ -60,30 +60,31 @@ for(let i = 0; i < chaptersArray.length; i++)
     }
 }
 
-let containerHeight = chapterSelectList.scrollHeight;
-console.log(containerHeight)
 
-let chapterHeight = chapterSelectList.children[index].offsetTop;
-console.log(chapterHeight);
-
-let chapterLocation = chapterHeight - 120;
-console.log(chapterLocation);
-
-chapterSelectList.scrollTop = chapterLocation;
-
-//chapterSelectList.style.visibility = 'hidden';
 chapterSelectButton.addEventListener('click', function()
 {
     if(chapterSelectList.style.display === 'none')
     {
         chapterSelectList.style.display = 'flex'
-        chapterSelectList.scrollTop = chapterLocation;
+        chapterSelectList.scrollTop = chapterSelectList.children[index].offsetTop;
+
     }
     else
     {
         chapterSelectList.style.display = 'none';
     }
 });
+
+
+chapterSelectList.addEventListener("scroll", updateY);
+
+function updateY()
+{
+    const scrollY = chapterSelectList.scrollTop;
+
+    console.log(scrollY);
+}
+
 
 function findPreviousChapterID(chapterID, chaptersArray)
 {

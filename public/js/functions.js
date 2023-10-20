@@ -1,4 +1,3 @@
-//library for various function to be used in my manga reader
 export async function getSuggestions(searchContent)
 {
     const resultsContainer = document.querySelector(".results_manga");
@@ -395,6 +394,8 @@ export function headerFunctionalities()
     const searchBarSmolLabel = document.querySelector(".smol_screen_label");
     const searchIcon = document.querySelector("#search_icon");
     const titleContainer = document.querySelector(".title_container");
+    const searchLabelBig = document.querySelector(".big_screen");
+    const searchInputBig = document.getElementById("search");
 
     let title;
     let inputBuffer = ''; // Store the input in a buffer
@@ -477,7 +478,9 @@ export function headerFunctionalities()
 
     searchBar.addEventListener("focus", function()
     {
-        searchContainer.style.width = "400px";
+        searchContainer.style.width = "500px";
+        searchLabelBig.style.width = "500px";
+        searchInputBig.style.width = "500px";
         resultsContainer.style.display = "flex";
         setTimeout(function()
         {
@@ -489,6 +492,8 @@ export function headerFunctionalities()
     {
         resultsContainer.style.opacity = "0";
         searchContainer.style.width = "250px";
+        searchLabelBig.style.width = "250px";
+        searchInputBig.style.width = "250px";
         setTimeout(function()
         {
             resultsContainer.style.display = "none";

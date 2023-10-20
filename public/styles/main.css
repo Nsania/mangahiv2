@@ -30,6 +30,7 @@ body
     height: 56px;
     width: 100vw;
     background-color: #1f1b23;
+    padding: 0 3vw;
 }
 
 .title_container
@@ -153,6 +154,8 @@ body
 {
     height: 80px;
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
     padding-left: 20px;
     font-family: 'Josefin Sans', sans-serif;
@@ -785,7 +788,6 @@ body
         transform: rotate(360deg);
     }
 }
-
 #reader>img
 {
     height: 65vh;
@@ -794,7 +796,7 @@ body
     background-color: white;
 }
 
-@media screen and (min-width: 600px)
+@media screen and (min-width: 1000px)
 {
     *
     {
@@ -812,6 +814,84 @@ body
     .header
     {
         padding: 0 15vw;
+    }
+
+    .search_container
+    {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: transparent;
+        height: 30px;
+        width: 250px;
+        border-radius: 0.5rem;
+
+        transition: all 0.1s ease-out;
+    }
+
+    .big_screen
+    {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        position: relative;
+        background-color: #645a6d;
+        height: 30px;
+        width: 250px;
+        padding-right: 10px;
+        border-radius: 0.5rem;
+        color: white;
+
+        transition: all 0.1s ease-out;
+    }
+
+    .search_container>input
+    {
+        position: absolute;
+        z-index: 5;
+        width: 250px;
+        height: 30px;
+        background-color: transparent;
+        font-size: 1.2rem;
+        border: none;
+        padding: 0 10px;
+        border-radius: 0.5rem;
+        color: white;
+
+        transition: all 0.1s ease-out;
+    }
+
+    .smol_screen
+    {
+        display: none;
+    }
+
+    .search_container_smol
+    {
+        display: none;
+    }
+
+    .results
+    {
+        right: 0;
+        margin-right: 15vw;
+        max-height: 700px;
+        max-width: 500px;
+        background-color: red;
+        transition: all 0.1s ease-out;
+    }
+
+    .results_placeholder
+    {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .results_manga
+    {
+        max-width: 500px;
+        transition: all 0.1s ease-out;
     }
 
     .below_header
@@ -834,6 +914,7 @@ body
         width: 70%;
     }
 
+
     .discovery_container
     {
         display: flex;
@@ -854,6 +935,45 @@ body
         width: 100vw;
         padding-left: 15vw;
         font-size: 3rem;
+    }
+
+    .discovery_skeleton
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 75%;
+        min-height: 50%;
+        background-color: transparent;
+        overflow: auto;
+        flex-wrap: wrap;
+    }
+
+    .div_skeleton
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 380px;
+        width: 230px;
+        background-color: #1f1b23;
+        margin: 2px;
+        border-radius: 0.5rem;
+    }
+
+    .discovery_image_skeleton
+    {
+        height: 300px;
+        width: 200px;
+    }
+
+    .discovery_text_skeleton
+    {
+        height: 30px;
+        width: 200px;
+        margin: 0;
     }
 
     .discovery
@@ -898,8 +1018,68 @@ body
     .discovery>div>a>img
     {
         height: 350px;
-
         object-fit: cover;
+    }
+
+
+    /*Reader*/
+
+    .controls
+    {
+        z-index: 1;
+        display: flex;
+        background-color: transparent;
+        width: 600px;
+        padding: 0;
+    }
+
+    .chapter_select_container
+    {
+        min-width: 400px;
+        max-width: 400px;
+    }
+
+    .chapter_select_list_container
+    {
+        z-index: 0;
+        top: 0;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        padding-right: 110px;
+    }
+
+    #chapter_select_list
+    {
+        display: flex;
+        width: 500px;
+        padding: 0 10px;
+    }
+
+    #chapter_select_list>a
+    {
+        width: 100%;
+    }
+
+    #reader
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #reader>img
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        width: 100vw;
+        margin: 2px 0;
     }
 
 }
