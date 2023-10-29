@@ -80,11 +80,11 @@ export async function getSuggestions(searchContent)
 }
 
 //this method will search for the manga ID, cover ID, cover file name. It will display the cover art in the image container
-export async function searchManga(title, container)
+export async function searchManga(title, container, limit)
 {
     if(title.trim() !== "") {
         // Make a GET request to the MangaDex API search endpoint
-        const response = await fetch(`http://localhost:3000/manga-proxy?title=${title}&limit=10`);
+        const response = await fetch(`http://localhost:3000/manga-proxy?title=${title}&limit=${limit}`);
         // Check if the request was successful (status code 200)
         if (response.ok) {
             const json_data = await response.json();
@@ -137,11 +137,13 @@ export async function searchManga(title, container)
                     console.log(mangaTitle);
                     i++;
                 }
+
+                return 1;
             }
         }
     }
-}
 
+}
 
 //method will get manga feed (all chapters available)
 export async function getChapters(mangaID)
@@ -553,6 +555,25 @@ export function headerFunctionalities()
             resultsContainer.style.opacity = "1";
         }, 100);
     });
+
+    searchBar.addEventListener("keydown", function(event)
+    {
+        if(event.key === 'Enter')
+        {
+            let search = searchBar.value;
+            window.location.href = `search.html?search=${search}`;
+        }
+    });
+
+    searchBarSmol.addEventListener("keydown", function(event)
+    {
+        if(event.key === 'Enter')
+        {
+            let search = searchBarSmol.value;
+            window.location.href = `search.html?search=${search}`;
+        }
+    });
+
 
     searchBar.addEventListener("blur", function()
     {

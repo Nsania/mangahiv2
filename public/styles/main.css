@@ -570,6 +570,96 @@ body::-webkit-scrollbar
 }
 
 
+/*----------------------------------------------------Search-------------------------------------------------------*/
+
+.below_header_search
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    background-color: transparent;
+    font-family: 'Josefin Sans', sans-serif;
+    color: white;
+}
+
+#resultsHeader
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 100vw;
+    background-color: transparent;
+    font-size: 1.8rem;
+}
+
+.search_results
+{
+    display: none;
+    flex-direction: column;
+    background-color: transparent;
+    width: 100vw;
+}
+
+.search_results>div
+{
+    display: flex;
+    flex-direction: row;
+    margin: 2px 0;
+    background-color: #1f1b23;
+    padding: 10px;
+}
+
+.search_results>div>a
+{
+    max-height: 80px;
+    min-height: 80px;
+    min-width: 56px;
+    max-width: 56px;
+}
+
+.search_results>div>h1
+{
+    font-size: 1.2em;
+    padding-left: 10px;
+}
+
+.search_results>div>a>img
+{
+    max-height: 80px;
+    min-height: 80px;
+    min-width: 56px;
+    max-width: 56px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.results_loader
+{
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 6;
+    background-color: transparent;
+}
+
+.results_loader>div
+{
+    height: 50px;
+    width: 50px;
+    border: 8px white solid;
+    border-top: 10px #312c3a solid;
+    border-radius: 100%;
+    animation: 1s spin ease infinite;
+}
+
+
 
 /*-----------------------------------------------------------------------------------------------------------------*/
 
@@ -587,10 +677,11 @@ body::-webkit-scrollbar
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    height: 400px;
-    width: 60vw;
+    height: 200px;
+    width: 100vw;
     background-color: transparent;
     margin-top: 50px;
+    padding-left: 10px;
 }
 
 .image_and_title_container>img
@@ -603,7 +694,7 @@ body::-webkit-scrollbar
 {
     height: 100%;
     color: white;
-    font-size: 2em;
+    font-size: 1.5em;
     padding-top: 50px;
     font-family: 'Josefin Sans', sans-serif;
     padding-left: 20px;
@@ -612,16 +703,17 @@ body::-webkit-scrollbar
 
 .manga_desc_container
 {
-    min-height: 200px;
-    width: 60vw;
+    height: 200px;
+    width: 100vw;
     overflow: auto;
     padding: 20px 0;
     background-color: transparent;
+    margin-top: 5px;
 }
 
 .manga_desc_container>p
 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: white;
     font-family: 'Josefin Sans', sans-serif;
 }
@@ -630,9 +722,9 @@ body::-webkit-scrollbar
 {
     display: flex;
     align-items: center;
-    width: 60vw;
+    width: 100vw;
     height: 50px;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-family: 'Josefin Sans', sans-serif;
     color: white;
     margin-top: 30px;
@@ -650,11 +742,11 @@ body::-webkit-scrollbar
 
 .chapterList_container_spinner
 {
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    width: 50px;
     background-color: transparent;
     border-radius: 100%;
-    border: 10px solid white;
+    border: 8px solid white;
     border-top-color: #312c3a;
     animation: spin 1s ease infinite;
 }
@@ -670,13 +762,12 @@ body::-webkit-scrollbar
 
 #chapterList>a
 {
-    line-height: 100px;
+    line-height: 80px;
     background-color: #1f1b23;
-    height: 100px;
-    width: 60vw;
-    font-size: 1.5rem;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    height: 80px;
+    width: 100vw;
+    font-size: 1.3em;
+    margin: 2px 0;
 
     white-space: nowrap;
     overflow: hidden;
@@ -777,10 +868,23 @@ body::-webkit-scrollbar
     max-width: 30ch;
 }
 
+.chapter_select_list_container
+{
+    position: absolute;
+    top: 106px;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+}
+
 #chapter_select_list
 {
     z-index: 1;
-    top: 106px;
+    top: 0;
+    /*left: 0;*/
     position: absolute;
 
     flex-direction: column;
@@ -934,11 +1038,11 @@ body::-webkit-scrollbar
 
 #page-loading
 {
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    width: 50px;
     background-color: transparent;
-    border-radius: 50%;
-    border: 10px solid #ffffff;
+    border-radius: 100%;
+    border: 8px solid #ffffff;
     border-top-color: #312c3a;
     animation: spin 1s ease infinite;
 }
@@ -1313,6 +1417,210 @@ body::-webkit-scrollbar
         object-fit: cover;
     }
 
+    /*manga2*/
+
+    #manga2_body
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image_and_title_container
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        height: 400px;
+        width: 60vw;
+        background-color: transparent;
+        margin-top: 50px;
+    }
+
+    .image_and_title_container>img
+    {
+        height: 100%;
+        border-radius: 0.5rem;
+    }
+
+    .image_and_title_container>h1
+    {
+        height: 100%;
+        color: white;
+        font-size: 2em;
+        padding-top: 50px;
+        font-family: 'Josefin Sans', sans-serif;
+        padding-left: 20px;
+        background-color: transparent;
+    }
+
+    .manga_desc_container
+    {
+        min-height: 200px;
+        width: 60vw;
+        overflow: auto;
+        padding: 20px 0;
+        background-color: transparent;
+    }
+
+    .manga_desc_container>p
+    {
+        font-size: 1.5rem;
+        color: white;
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    #chapters_header
+    {
+        display: flex;
+        align-items: center;
+        width: 60vw;
+        height: 50px;
+        font-size: 2rem;
+        font-family: 'Josefin Sans', sans-serif;
+        color: white;
+        margin-top: 30px;
+    }
+
+    #chapterList-skeleton
+    {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 250px;
+        width: 100vw;
+        background-color: transparent;
+    }
+
+    .chapterList_container_spinner
+    {
+        height: 70px;
+        width: 70px;
+        background-color: transparent;
+        border-radius: 100%;
+        border: 10px solid white;
+        border-top-color: #312c3a;
+        animation: spin 1s ease infinite;
+    }
+
+
+    #chapterList
+    {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #312c3a;
+    }
+
+    #chapterList>a
+    {
+        line-height: 100px;
+        background-color: #1f1b23;
+        height: 100px;
+        width: 60vw;
+        font-size: 1.5rem;
+        margin-top: 5px;
+        margin-bottom: 5px;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 20px;
+        border-radius: 0.5rem;
+        font-family: 'Josefin Sans', sans-serif;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    /*search*/
+
+    .below_header_search
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100vw;
+        background-color: transparent;
+        font-family: 'Josefin Sans', sans-serif;
+        color: white;
+    }
+
+    #resultsHeader
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        width: 100vw;
+        background-color: transparent;
+    }
+
+    .search_results
+    {
+        display: none;
+        flex-direction: column;
+        background-color: transparent;
+        width: 70vw;
+    }
+
+    .search_results>div
+    {
+        display: flex;
+        flex-direction: row;
+        margin: 10px 0;
+        background-color: #1f1b23;
+        padding: 10px;
+        border-radius: 0.5rem;
+    }
+
+    .search_results>div>a
+    {
+        max-height: 256px;
+        min-height: 256px;
+        min-width: 183px;
+        max-width: 183px;
+    }
+
+    .search_results>div>h1
+    {
+        padding-left: 20px;
+    }
+
+    .search_results>div>a>img
+    {
+        max-height: 256px;
+        min-height: 256px;
+        min-width: 183px;
+        max-width: 183px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+    }
+
+    .results_loader
+    {
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+        z-index: 6;
+        background-color: transparent;
+    }
+
+    .results_loader>div
+    {
+        height: 60px;
+        width: 60px;
+        border: 10px white solid;
+        border-top: 10px #312c3a solid;
+        border-radius: 100%;
+        animation: 1s spin ease infinite;
+    }
 
     /*Reader*/
 
@@ -1333,19 +1641,18 @@ body::-webkit-scrollbar
 
     .chapter_select_list_container
     {
-        z-index: 0;
-        top: 0;
+        top: 106px;
         position: absolute;
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100vw;
         height: 100vh;
-        padding-right: 110px;
     }
 
     #chapter_select_list
     {
+        top: 0;
         display: flex;
         width: 500px;
         padding: 0 10px;

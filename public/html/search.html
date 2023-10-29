@@ -2,17 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga-Hi</title>
+    
+    
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="icon" type="image/png" href="../images/Laura/favicon-32x32.png">
+    
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    
+    <!--icon-->
+    <script src="https://kit.fontawesome.com/c9cfc6f8e5.js" crossorigin="anonymous"></script>
+    
+    
+    <script type="module" src="../js/searchList.js" defer></script>
 </head>
 <body>
-    <h1>Search</h1>
-    <a href="index.html"><button>Home</button></a>
-    <h2 id="resultsHeader">results</h2>
-    <div class="search_results">
-    
+    <header class="header">
+        <span class="header_content_container">
+            
+            <a href="index.html" class="title_container">
+                <img src="../images/laura.png">
+                <h1>MangaHi</h1>
+            </a>
+            
+            <span class="search_container">
+                <label for="search" class="big_screen">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </label>
+                <input type="input" id="search" placeholder="Search" autocomplete="off">
+            </span>
+            
+            
+            <label for="search_smol" class="smol_screen">
+                <i class="fa-solid fa-magnifying-glass" id="search_icon"></i>
+            </label>
+            <span class="search_container_smol">
+                <label class="smol_screen_label">
+                    <input type="input" id="search_smol" placeholder="Search" autocomplete="off">
+                </label>
+            </span>
+        </span>
+    </header>
+    <div class="results" id="results">
+        <div class="results_placeholder"><h1>Start your manga search...</h1></div>
+        <div class="results_skeleton">
+            <div class="image_skeleton"></div>
+            <div class="text_skeleton"></div>
+        </div>
+        <div class="results_manga">
+        
+        </div>
     </div>
     
-  
-    <script type="module" src="../js/searchList.js"></script>
+    <div class="below_header_search">
+        <h1 id="resultsHeader">results</h1>
+        <div class="results_loader"><div></div></div>
+        <div class="search_results"></div>
+    </div>
+    
 </body>
 </html>
