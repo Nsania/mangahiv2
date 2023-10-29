@@ -357,6 +357,72 @@ export async function getRandomManga(container)
     }
 }
 
+export async function getFeaturedMangas(manga, container)
+{
+    const featured = document.querySelector(`#${container}`);
+    const featuredLink = featured.querySelector('a');
+    const titleContainer = featured.querySelector('.featured_title>div');
+    const coverContainer = featured.querySelector('.featured_cover>img');
+    const descContainer = featured.querySelector('.featured_desc>div');
+    const backgroundContainer = featured.querySelector('.blur');
+
+
+    const response = await fetch(`http://localhost:3000/manga-proxy?title=${manga}`);
+
+    if(response.ok)
+    {
+        const json_data = await response.json();
+
+        let mangaID = json_data.data[0].id;
+        let mangaTitle = json_data.data[0].attributes.title.en;
+        let mangaDesc = json_data.data[0].attributes.description.en;
+        let mangaCoverFileName;
+
+        console.log("------------------------------");
+        console.log(mangaID);
+        console.log(mangaTitle);
+        console.log(mangaDesc);
+
+        if(mangaID != null)
+        {
+            const response2 = await fetch(`http://localhost:3000/cover-proxy?limit=1&manga[]=${mangaID}`);
+
+            if(response2.ok)
+            {
+                const json_data2 = await response2.json();
+
+                mangaCoverFileName = json_data2.data[0].attributes.fileName;
+            }
+        }
+
+        if(mangaCoverFileName != null)
+        {
+            featuredLink.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
+            coverContainer.src = `http://localhost:3000/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
+            titleContainer.textContent = mangaTitle;
+            backgroundContainer.style.backgroundImage = `url(http://localhost:3000/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName})`;
+
+            let maxWords = 50;
+            let text = mangaDesc.split(" ");
+            let desc;
+
+            if(text.length > maxWords)
+            {
+                text = text.slice(0, maxWords);
+                desc = text.join(" ") + "...";
+            }
+
+            descContainer.textContent = desc;
+        }
+
+    }
+    else
+    {
+        console.log("Error with response");
+    }
+
+}
+
 export function displayScroll()
 {
     window.addEventListener("scroll", function()

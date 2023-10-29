@@ -1,81 +1,14 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <style>
-    /* Styles for the custom select */
-    .custom-select {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .select-wrapper {
-      display: none;
-      position: absolute;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      max-height: 100px;
-      overflow-y: auto;
-    }
-    
-    .custom-select.active .select-wrapper {
-      display: block;
-    }
-    
-    .select-option {
-      padding: 5px;
-      cursor: pointer;
-    }
-  </style>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+    <script type="module" src="../js/test.js" defer></script>
 </head>
 <body>
-  <div class="custom-select">
-    <div class="selected-option" onclick="toggleDropdown()">Select an option</div>
-    <div class="select-wrapper" id="selectWrapper">
-      <!-- Options will be dynamically added here -->
-    </div>
-  </div>
-  
-  <script>
-    const options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10", "Option 11", "Option 12", "Option 13", "Option 14", "Option 15", "Option 16", "Option 17", "Option 18", "Option 19", "Option 20"];
-    let startIndex = 0; // Index to track the start of displayed options
-    
-    function toggleDropdown() {
-      const customSelect = document.querySelector('.custom-select');
-      customSelect.classList.toggle('active');
-      
-      const selectWrapper = customSelect.querySelector('.select-wrapper');
-      selectWrapper.innerHTML = ''; // Clear the existing options
-      
-      for (let i = startIndex; i < startIndex + 5 && i < options.length; i++) {
-        const option = document.createElement('div');
-        option.classList.add('select-option');
-        option.textContent = options[i];
-        option.onclick = () => selectOption(i);
-        selectWrapper.appendChild(option);
-      }
-      scrollDropdownToSelected();
-    }
-    
-    function selectOption(index) {
-      const selectedOption = document.querySelector('.selected-option');
-      selectedOption.textContent = options[index];
-      toggleDropdown();
-    }
-    
-    function scrollDropdownToSelected() {
-      const selectedOption = document.querySelector('.selected-option').textContent;
-      const selectWrapper = document.getElementById('selectWrapper');
-      const options = selectWrapper.getElementsByClassName('select-option');
-      
-      for (let i = 0; i < options.length; i++) {
-        if (options[i].textContent === selectedOption) {
-          selectWrapper.scrollTop = options[i].offsetTop;
-          break;
-        }
-      }
-    }
-    
-    toggleDropdown(); // Initialize the dropdown with the first 5 options
-  </script>
+
 </body>
 </html>
