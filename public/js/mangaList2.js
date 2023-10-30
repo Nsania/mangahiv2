@@ -1,5 +1,6 @@
-import {getChapters, initialScroll, headerFunctionalities} from "./functions.js";
+import {getChapters, headerFunctionalities} from "./functions.js";
 
+headerFunctionalities();
 const query = window.location.search;
 const search = new URLSearchParams(query);
 
@@ -24,7 +25,7 @@ cover.src = `https://mangahiproxy.onrender.com/cover-source-proxy?mangaID=${mang
 
 chapterList.style.display = "none";
 chapterListSkeleton.style.display = "flex";
-headerFunctionalities();
+
 let getChaptersResult = await getChapters(mangaID);
 
 if(getChaptersResult === 1)
