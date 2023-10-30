@@ -1,4 +1,4 @@
-import {getPages, loadChapters, headerFunctionalities, initialScroll} from "./functions.js";
+import {getPages, loadChapters, headerFunctionalities} from "./functions.js";
 
 headerFunctionalities();
 
@@ -38,8 +38,6 @@ chapterSelectLabel.textContent = `Chapter ${chapter}: ${chapterTitle}`;
 
 let chaptersArray = await loadChapters(mangaID);
 
-
-//headerFunctionalities();
 
 chaptersArray.forEach(e => {
     let option = document.createElement("a");

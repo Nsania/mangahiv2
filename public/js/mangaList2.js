@@ -20,8 +20,7 @@ description.innerHTML = mangaDesc;
 const chapterList = document.getElementById("chapterList");
 const chapterListSkeleton = document.getElementById("chapterList-skeleton");
 const cover = document.getElementById("cover_art");
-//cover.src = `https://uploads.mangadex.org/covers/${mangaID}/${coverFileName}.256.jpg`;
-cover.src = `http://localhost:3000/cover-source-proxy?mangaID=${mangaID}&coverID=${coverFileName}.256.jpg`;
+cover.src = `https://mangahiproxy.onrender.com/cover-source-proxy?mangaID=${mangaID}&coverID=${coverFileName}.256.jpg`;
 
 chapterList.style.display = "none";
 chapterListSkeleton.style.display = "flex";

@@ -11,8 +11,8 @@ export async function getSuggestions(searchContent)
 
     if(searchContent.trim() !== '')
     {
-        let response = await fetch(`http://localhost:3000/manga-proxy?title=${searchContent}&limit=5`);
-
+        let response = await fetch(`https://mangahiproxy.onrender.com/manga-proxy?title=${searchContent}&limit=5`);
+        
         if(response.ok)
         {
             let json_data = await response.json();
@@ -30,7 +30,7 @@ export async function getSuggestions(searchContent)
 
                     if(mangaID != null)
                     {
-                        let response2 = await fetch(`http://localhost:3000/cover-proxy?limit=1&manga[]=${mangaID}`);
+                        let response2 = await fetch(`https://mangahiproxy.onrender.com/cover-proxy?limit=1&manga[]=${mangaID}`);
 
                         if(response2.ok)
                         {
@@ -63,7 +63,7 @@ export async function getSuggestions(searchContent)
                     suggestion_link.href = `manga2.html?mangaTitle=${e.mangaTitle}&mangaID=${e.mangaID}&coverFileName=${e.mangaCoverFileName}&mangaDesc=${e.mangaDesc}`;
 
                     let suggestion_image = document.createElement("img");
-                    suggestion_image.src = `http://localhost:3000/cover-source-proxy?mangaID=${e.mangaID}&coverID=${e.mangaCoverFileName}.256.jpg`;
+                    suggestion_image.src = `https://mangahiproxy.onrender.com/cover-source-proxy?mangaID=${e.mangaID}&coverID=${e.mangaCoverFileName}.256.jpg`;
                     let suggestion_title = document.createElement("h1");
                     suggestion_title.textContent = `${e.mangaTitle}`;
 
@@ -84,7 +84,8 @@ export async function searchManga(title, container, limit)
 {
     if(title.trim() !== "") {
         // Make a GET request to the MangaDex API search endpoint
-        const response = await fetch(`http://localhost:3000/manga-proxy?title=${title}&limit=${limit}`);
+        const response = await fetch(`https://mangahiproxy.onrender.com/manga-proxy?title=${title}&limit=${limit}`);
+        
         // Check if the request was successful (status code 200)
         if (response.ok) {
             const json_data = await response.json();
@@ -100,8 +101,8 @@ export async function searchManga(title, container, limit)
                     let mangaCoverFileName;
 
                     if (mangaID != null) {
-                        let response2 = await fetch(`http://localhost:3000/cover-proxy?limit=1&manga[]=${mangaID}`);
-
+                        let response2 = await fetch(`https://mangahiproxy.onrender.com/cover-proxy?limit=1&manga[]=${mangaID}`);
+                        
                         if(response2.ok)
                         {
                             let json_data2 = await response2.json();
@@ -124,7 +125,7 @@ export async function searchManga(title, container, limit)
                         suggestion_link.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
 
                         let suggestion_image = document.createElement("img");
-                        suggestion_image.src = `http://localhost:3000/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
+                        suggestion_image.src = `https://mangahiproxy.onrender.com/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
                         let suggestion_title = document.createElement("h1");
                         suggestion_title.textContent = `${mangaTitle}`;
 
@@ -148,8 +149,8 @@ export async function searchManga(title, container, limit)
 //method will get manga feed (all chapters available)
 export async function getChapters(mangaID)
 {
-    const response = await fetch(`http://localhost:3000/chapters-proxy?mangaID=${mangaID}`);
-
+    const response = await fetch(`https://mangahiproxy.onrender.com/chapters-proxy?mangaID=${mangaID}`);
+    
     localStorage.setItem("mangaID", mangaID);
 
     let chapters = {};
@@ -171,7 +172,7 @@ export async function getChapters(mangaID)
 
         while(i < requests)
         {
-            const response2 = await fetch(`http://localhost:3000/chapters-proxy?mangaID=${mangaID}&limit=100&offset=${offset}&translatedLanguage[]=en&includeFutureUpdates=1&order[createdAt]=asc&order[updatedAt]=asc&order[publishAt]=asc&order[readableAt]=asc&order[volume]=asc&order[chapter]=asc`);
+            const response2 = await fetch(`https://mangahiproxy.onrender.com/chapters-proxy?mangaID=${mangaID}&limit=100&offset=${offset}&translatedLanguage[]=en&includeFutureUpdates=1&order[createdAt]=asc&order[updatedAt]=asc&order[publishAt]=asc&order[readableAt]=asc&order[volume]=asc&order[chapter]=asc`);
 
             if(response2.ok)
             {
@@ -220,9 +221,10 @@ export async function getChapters(mangaID)
 //method will get pages for each chapter
 export async function getPages(mangaChapterID)
 {
-    const response = await fetch(`http://localhost:3000/pages-proxy?mangaChapterID=${mangaChapterID}`);
+    const response = await fetch(`https://mangahiproxy.onrender.com/pages-proxy?mangaChapterID=${mangaChapterID}`);
+    
     let reader = document.getElementById("reader");
-
+    
     if(response.ok)
     {
         const json_data = await response.json();
@@ -238,7 +240,7 @@ export async function getPages(mangaChapterID)
             while(i < json_data.chapter.data.length)
             {
                 let image = document.createElement("img");
-                image.src = `http://localhost:3000/pages-source-proxy?hash=${hash}&pageFile=${json_data.chapter.data[i]}`;
+                image.src = `https://mangahiproxy.onrender.com/pages-source-proxy?hash=${hash}&pageFile=${json_data.chapter.data[i]}`;
 
                 reader.appendChild(image);
                 i++;
@@ -251,7 +253,8 @@ export async function getPages(mangaChapterID)
 
 export async function loadChapters(mangaID)
 {
-    const response = await fetch(`http://localhost:3000/chapters-proxy?mangaID=${mangaID}&limit=100&translatedLanguage[]=en&includeFutureUpdates=1&order[createdAt]=asc&order[updatedAt]=asc&order[publishAt]=asc&order[readableAt]=asc&order[volume]=asc&order[chapter]=asc`);
+    const response = await fetch(`https://mangahiproxy.onrender.com/chapters-proxy?mangaID=${mangaID}&limit=100&translatedLanguage[]=en&includeFutureUpdates=1&order[createdAt]=asc&order[updatedAt]=asc&order[publishAt]=asc&order[readableAt]=asc&order[volume]=asc&order[chapter]=asc`);
+    
 
     let chapters = {};
     let chaptersArray = [];
@@ -272,7 +275,7 @@ export async function loadChapters(mangaID)
 
         while(i < requests)
         {
-            const response2 = await fetch(`http://localhost:3000/chapters-proxy?mangaID=${mangaID}&limit=100&offset=${offset}&translatedLanguage%5B%5D=en&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc`);
+            const response2 = await fetch(`https://mangahiproxy.onrender.com/chapters-proxy?mangaID=${mangaID}&limit=100&offset=${offset}&translatedLanguage%5B%5D=en&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc`);
 
             if(response2.ok)
             {
@@ -308,8 +311,8 @@ export async function loadChapters(mangaID)
 
 export async function getRandomManga(container)
 {
-    const response = await fetch(`http://localhost:3000/random-proxy`);
-
+    const response = await fetch(`https://mangahiproxy.onrender.com/random-proxy`);
+    
     if(response.ok)
     {
         const json_data = await response.json();
@@ -325,8 +328,7 @@ export async function getRandomManga(container)
 
         if(mangaID != null)
         {
-            const response2 = await fetch(`http://localhost:3000/cover-proxy?limit=1&manga[]=${mangaID}`);
-
+            const response2 = await fetch(`https://mangahiproxy.onrender.com/cover-proxy?limit=1&manga[]=${mangaID}`);
 
             if(response2.ok)
             {
@@ -347,7 +349,8 @@ export async function getRandomManga(container)
         let link = document.createElement("a");
         link.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
         let cover = document.createElement("img");
-        cover.src = `http://localhost:3000/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
+        cover.src = `https://mangahiproxy.onrender.com/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
+
         let title = document.createElement("h1");
         title.textContent = mangaTitle;
 
@@ -369,7 +372,8 @@ export async function getFeaturedMangas(manga, container)
     const backgroundContainer = featured.querySelector('.blur');
 
 
-    const response = await fetch(`http://localhost:3000/manga-proxy?title=${manga}`);
+    const response = await fetch(`https://mangahiproxy.onrender.com/manga-proxy?title=${manga}`);
+    
 
     if(response.ok)
     {
@@ -387,8 +391,8 @@ export async function getFeaturedMangas(manga, container)
 
         if(mangaID != null)
         {
-            const response2 = await fetch(`http://localhost:3000/cover-proxy?limit=1&manga[]=${mangaID}`);
-
+            const response2 = await fetch(`https://mangahiproxy.onrender.com/cover-proxy?limit=1&manga[]=${mangaID}`);
+            
             if(response2.ok)
             {
                 const json_data2 = await response2.json();
@@ -400,9 +404,9 @@ export async function getFeaturedMangas(manga, container)
         if(mangaCoverFileName != null)
         {
             featuredLink.href = `manga2.html?mangaTitle=${mangaTitle}&mangaID=${mangaID}&coverFileName=${mangaCoverFileName}&mangaDesc=${mangaDesc}`;
-            coverContainer.src = `http://localhost:3000/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
+            coverContainer.src = `https://mangahiproxy.onrender.com/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName}.256.jpg`;
             titleContainer.textContent = mangaTitle;
-            backgroundContainer.style.backgroundImage = `url(http://localhost:3000/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName})`;
+            backgroundContainer.style.backgroundImage = `url(https://mangahiproxy.onrender.com/cover-source-proxy?mangaID=${mangaID}&coverID=${mangaCoverFileName})`;
 
             let maxWords = 50;
             let text = mangaDesc.split(" ");
