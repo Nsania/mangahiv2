@@ -1969,7 +1969,7 @@ body::-webkit-scrollbar
         overflow: hidden;
         text-overflow: ellipsis;
         min-width: 20ch;
-        max-width: 40ch;
+        max-width: 100%;
         border-radius: 0.5rem;
 
     }
