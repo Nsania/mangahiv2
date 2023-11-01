@@ -43,7 +43,7 @@ let chaptersArray = await loadChapters(mangaID);
 
 chaptersArray.forEach(e => {
     let option = document.createElement("a");
-    option.href = `reader.html?&chapter=${e.chapterNum}&chapterID=${e.chapterID}`;
+    option.href = `reader.html?&chapter=${e.chapterNum}&chapterID=${e.chapterID}&chapterTitle=${e.chapterTitle}`;
     option.textContent = `Chapter ${e.chapterNum}: ${e.chapterTitle}`;
 
     chapterSelectList.appendChild(option);
@@ -125,17 +125,37 @@ function findPreviousChapterNum(chapterID, chaptersArray)
     return chaptersArray[index+1].chapterNum;
 }
 
+function findPreviousChapterTitle(chapterID, chaptersArray)
+{
+    let index;
+    for(let i = 0; i < chaptersArray.length; i++)
+    {
+        if(chaptersArray[i].chapterID === chapterID)
+        {
+            index = i;
+            break;
+        }
+    }
+    if(index === chaptersArray.length - 1)
+    {
+        return -1;
+    }
+    //console.log(chaptersArray[index-1].chapterID);
+    return chaptersArray[index+1].chapterTitle;
+}
+
 let previousChapterID = findPreviousChapterID(mangaChapterID, chaptersArray);
 let previousChapter = findPreviousChapterNum(mangaChapterID, chaptersArray);
+let previousChapterTitle = findPreviousChapterTitle(mangaChapterID, chaptersArray);
 
 if(previousChapterID === -1 && previousChapter === -1)
 {
     prevButton.style.display = "none";
 }
 
-function loadPreviousChapter(previousChapter, previousChapterID)
+function loadPreviousChapter(previousChapter, previousChapterID, previousChapterTitle)
 {
-    window.location.href = `reader.html?&chapter=${previousChapter}&chapterID=${previousChapterID}`
+    window.location.href = `reader.html?&chapter=${previousChapter}&chapterID=${previousChapterID}&chapterTitle=${previousChapterTitle}`;
 }
 
 function findNextChapterID(chapterID, chaptersArray)
@@ -177,37 +197,56 @@ function findNextChapterNum(chapterID, chaptersArray)
     return chaptersArray[index-1].chapterNum;
 }
 
+function findNextChapterTitle(chapterID, chaptersArray)
+{
+    let index;
+    for(let i = 0; i < chaptersArray.length; i++)
+    {
+        if(chaptersArray[i].chapterID === chapterID)
+        {
+            index = i;
+            break;
+        }
+    }
+    if(index === 0)
+    {
+        return -1;
+    }
+    return chaptersArray[index-1].chapterTitle;
+}
+
 let nextChapterID = findNextChapterID(mangaChapterID, chaptersArray);
 let nextChapter = findNextChapterNum(mangaChapterID, chaptersArray);
+let nextChapterTitle = findNextChapterTitle(mangaChapterID, chaptersArray);
 
 if(nextChapterID === -1 && nextChapter === -1)
 {
     nextButton.style.display = "none";
 }
 
-function loadNextChapter(nextChapter, nextChapterID)
+function loadNextChapter(nextChapter, nextChapterID, nextChapterTitle)
 {
 
-    window.location.href = `reader.html?&chapter=${nextChapter}&chapterID=${nextChapterID}`
+    window.location.href = `reader.html?&chapter=${nextChapter}&chapterID=${nextChapterID}&chapterTitle=${nextChapterTitle}`;
 }
 prevButton.addEventListener("click", function()
 {
-    loadPreviousChapter(previousChapter, previousChapterID);
+    loadPreviousChapter(previousChapter, previousChapterID, previousChapterTitle);
 });
 
 prevButton2.addEventListener("click", function()
 {
-    loadPreviousChapter(previousChapter, previousChapterID);
+    loadPreviousChapter(previousChapter, previousChapterID, previousChapterTitle);
 });
 
 nextButton.addEventListener("click", function()
 {
-    loadNextChapter(nextChapter, nextChapterID);
+    loadNextChapter(nextChapter, nextChapterID, nextChapterTitle);
 });
 
 nextButton2.addEventListener("click", function()
 {
-    loadNextChapter(nextChapter, nextChapterID);
+    loadNextChapter(nextChapter, nextChapterID, nextChapterTitle);
 });
 
 function goToChapterList(mangaTitle, mangaID, coverFileName, mangaDesc)
