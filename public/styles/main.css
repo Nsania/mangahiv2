@@ -287,7 +287,7 @@ body::-webkit-scrollbar
 
 .featured_container
 {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -437,6 +437,7 @@ body::-webkit-scrollbar
 
 .featured_loading
 {
+    display: flex;
     height: 270px;
     width: 100vw;
     display: none;
@@ -453,6 +454,7 @@ body::-webkit-scrollbar
     width: 40px;
     height: 40px;
     animation: spin 1s ease infinite; /* Animate the spinning */
+    z-index: 10;
 }
 
 
@@ -1327,7 +1329,7 @@ body::-webkit-scrollbar
 
     .featured_container
     {
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
         position: relative;
@@ -1485,6 +1487,7 @@ body::-webkit-scrollbar
 
     .featured_loading
     {
+        display: flex;
         height: 400px;
         width: 100vw;
         display: none;
@@ -2231,7 +2234,7 @@ body::-webkit-scrollbar
 
     .featured_container
     {
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
         position: relative;
@@ -2372,6 +2375,7 @@ body::-webkit-scrollbar
 
     .featured_loading
     {
+        display: flex;
         margin-top: 20px;
         height: 400px;
     }

@@ -13,8 +13,8 @@ const nav3 = document.getElementById("nav3");
 const nav4 = document.getElementById("nav4");
 const nav5 = document.getElementById("nav5");
 
-featuredContainer.style.display = "none";
 featuredSpinner.style.display = "flex";
+featuredContainer.style.display = "none";
 
 headerFunctionalities();
 
