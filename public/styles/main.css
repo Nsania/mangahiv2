@@ -870,9 +870,9 @@ body::-webkit-scrollbar
 
 .chapter_select_list_container
 {
+    display: none;
     position: absolute;
     top: 106px;
-    display: flex;
     height: 100vh;
     width: 100vw;
     justify-content: center;
@@ -1028,7 +1028,7 @@ body::-webkit-scrollbar
 
 #reader-skeleton
 {
-
+    display: none;
     justify-content: center;
     align-items: center;
     height: 87vh;
@@ -1801,6 +1801,7 @@ body::-webkit-scrollbar
 
     .chapterList_container_spinner
     {
+        display: none;
         height: 50px;
         width: 50px;
         background-color: transparent;
