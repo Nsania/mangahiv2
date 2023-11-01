@@ -704,7 +704,7 @@ body::-webkit-scrollbar
 .manga_desc_container
 {
     height: 200px;
-    width: 100vw;
+    width: 95vw;
     overflow: auto;
     padding: 20px 0;
     background-color: transparent;
@@ -722,7 +722,7 @@ body::-webkit-scrollbar
 {
     display: flex;
     align-items: center;
-    width: 100vw;
+    width: 95vw;
     height: 50px;
     font-size: 1.5rem;
     font-family: 'Josefin Sans', sans-serif;
@@ -763,13 +763,12 @@ body::-webkit-scrollbar
 
 #chapterList>a
 {
-    line-height: 80px;
+    line-height: 90px;
     background-color: #1f1b23;
     height: 80px;
-    width: 100vw;
+    width: 95vw;
     font-size: 1.3em;
     margin: 2px 0;
-
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1487,7 +1486,6 @@ body::-webkit-scrollbar
         display: flex;
         height: 400px;
         width: 100vw;
-        display: none;
         justify-content: center;
         align-items: center;
         background-color: transparent;
@@ -1822,7 +1820,7 @@ body::-webkit-scrollbar
 
     #chapterList>a
     {
-        line-height: 80px;
+        line-height: 90px;
         background-color: #1f1b23;
         height: 80px;
         width: 95vw;
@@ -2585,7 +2583,7 @@ body::-webkit-scrollbar
 
     #chapterList>a
     {
-        line-height: 100px;
+        line-height: 110px;
         background-color: #1f1b23;
         height: 100px;
         width: 60vw;
