@@ -140,10 +140,9 @@ body::-webkit-scrollbar
 
 .results
 {
+    display: none;
     z-index: 100;
     top: 56px;
-    /*position: absolute;*/
-    /*display: flex;*/
     min-height: 80px;
     max-height: 700px;
     width: 100vw;
@@ -440,7 +439,6 @@ body::-webkit-scrollbar
     display: flex;
     height: 270px;
     width: 100vw;
-    display: none;
     justify-content: center;
     align-items: center;
     background-color: transparent;
@@ -744,6 +742,7 @@ body::-webkit-scrollbar
 
 .chapterList_container_spinner
 {
+    display: none;
     height: 50px;
     width: 50px;
     background-color: transparent;
@@ -1047,6 +1046,7 @@ body::-webkit-scrollbar
     border: 8px solid #ffffff;
     border-top-color: #312c3a;
     animation: spin 1s ease infinite;
+    z-index: 0;
 }
 
 @keyframes spin
@@ -1183,10 +1183,7 @@ body::-webkit-scrollbar
     .results
     {
         display: none;
-        z-index: 100;
         top: 56px;
-        /*position: absolute;*/
-        /*display: flex;*/
         min-height: 80px;
         max-height: 700px;
         width: 100vw;
