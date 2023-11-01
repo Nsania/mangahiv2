@@ -177,6 +177,7 @@ body::-webkit-scrollbar
 
 .results_manga
 {
+    display: none;
     z-index: 3;
     position: relative;
 
@@ -1179,6 +1180,7 @@ body::-webkit-scrollbar
 
     .results
     {
+        display: none;
         z-index: 100;
         top: 56px;
         /*position: absolute;*/
@@ -2198,6 +2200,7 @@ body::-webkit-scrollbar
 
     .results
     {
+        display: none;
         right: 0;
         margin-right: 15vw;
         max-height: 700px;
@@ -2390,7 +2393,7 @@ body::-webkit-scrollbar
         background-color: transparent;
         height: 50px;
         width: 100vw;
-        padding-left: 20vw;
+        padding-left: 19vw;
         font-size: 2rem;
     }
 
@@ -2413,8 +2416,8 @@ body::-webkit-scrollbar
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 250px;
-        width: 150px;
+        height: 300px;
+        width: 200px;
         background-color: #1f1b23;
         margin: 2px;
         border-radius: 0.5rem;
@@ -2422,8 +2425,8 @@ body::-webkit-scrollbar
 
     .discovery_image_skeleton
     {
-        height: 190px;
-        width: 120px;
+        height: 250px;
+        width: 170px;
     }
 
     .discovery_text_skeleton
@@ -2453,8 +2456,8 @@ body::-webkit-scrollbar
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 250px;
-        width: 150px;
+        height: 300px;
+        width: 200px;
         background-color: #1f1b23;
         margin: 2px;
         border-radius: 0.5rem;
@@ -2462,8 +2465,8 @@ body::-webkit-scrollbar
 
     .discovery>div>a
     {
-        min-height: 190px;
-        min-width: 120px;
+        min-height: 250px;
+        min-width: 170px;
     }
 
     .discovery>div>h1
@@ -2477,7 +2480,7 @@ body::-webkit-scrollbar
 
     .discovery>div>a>img
     {
-        height: 190px;
+        height: 250px;
         object-fit: cover;
     }
 
@@ -2559,6 +2562,7 @@ body::-webkit-scrollbar
 
     .chapterList_container_spinner
     {
+        display: none;
         height: 70px;
         width: 70px;
         background-color: transparent;

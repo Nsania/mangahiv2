@@ -21,6 +21,8 @@ const mangaTitle = localStorage.getItem("mangaTitle");
 const coverFileName = localStorage.getItem("coverFileName");
 const mangaDesc = localStorage.getItem("mangaDesc");
 
+document.title = `${chapter} | ${chapterTitle}`;
+
 const chapterSelectButton = document.getElementById("chapter_select_drop_down");
 const chapterSelectLabel = document.getElementById("chapter_selected");
 const chapterSelectList = document.getElementById("chapter_select_list");

@@ -9,6 +9,8 @@ const mangaTitle = search.get("mangaTitle");
 const coverFileName = search.get("coverFileName");
 const mangaDesc = search.get("mangaDesc");
 
+document.title = `${mangaTitle} - MangaHi`;
+
 localStorage.setItem("mangaID", mangaID);
 localStorage.setItem("mangaTitle", mangaTitle);
 localStorage.setItem("coverFileName", coverFileName);
@@ -22,7 +24,9 @@ const chapterList = document.getElementById("chapterList");
 const chapterListSkeleton = document.getElementById("chapterList-skeleton");
 const cover = document.getElementById("cover_art");
 cover.src = `https://mangahiproxy.onrender.com/cover-source-proxy?mangaID=${mangaID}&coverID=${coverFileName}.256.jpg`;
+const loaderContainer = document.querySelector(".chapterList_container_spinner");
 
+loaderContainer.style.display = "flex";
 chapterList.style.display = "none";
 chapterListSkeleton.style.display = "flex";
 

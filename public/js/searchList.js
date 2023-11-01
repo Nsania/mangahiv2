@@ -14,6 +14,8 @@ results.style.display = "none";
 let title = search.get("search");
 resultsHeader.innerHTML = `"${title}" results`;
 
+document.title = `"${title}" - MangaHi`;
+
 let status = await searchManga(title, searchResultsContainer, 100);
 
 if(status === 1)
