@@ -871,7 +871,7 @@ body::-webkit-scrollbar
 
 .chapter_select_list_container
 {
-    display: none;
+    display: flex;
     position: absolute;
     top: 106px;
     height: 100vh;
